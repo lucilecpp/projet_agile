@@ -31,17 +31,6 @@ class Application:
 
         self.effacer_donnee_json()
 
-        # Partie 1: Mode de jeu
-        self.label_mode_jeu = Label(master, text="Sélectionnez le Mode de jeu:")
-        self.label_mode_jeu.pack()
-        self.frame_mode_jeu = Listbox(master)
-        self.frame_mode_jeu.insert(1, "Strict")
-        self.frame_mode_jeu.insert(2, "Médiane")
-        self.frame_mode_jeu.insert(3, "Moyenne")
-        self.frame_mode_jeu.insert(4, "Majorité absolue")
-        self.frame_mode_jeu.insert(5, "Majorité relative")
-        self.frame_mode_jeu.pack()
-
         # Partie 2: Nombre de joueur
         self.label_nbJoueur = Label(master, text="Entrez le nombre de joueurs \n Veuillez entrer un entier : ")
         self.label_nbJoueur.pack()
@@ -82,16 +71,41 @@ class Application:
                     # Entrée des pseudos
                     value = StringVar()
                     self.liste_values.append(value)
+                
                     self.label_pseudo = Label(fenetre_pseudo, text="Entrez le pseudo :")
-                    self.label_pseudo.pack()
+                    self.label_pseudo.grid(column=500)
                     entree = Entry(fenetre_pseudo, textvariable=value, width=30)
-                    entree.pack()
+                    entree.grid(column=500)
+                
+                label_instruction = Label(fenetre_pseudo, text="\n Veuillez valider les pseudos avant de choisir le mode de jeu :")
+                label_instruction.grid(column=500)
                 
                 bouton_valider_pseudo = Button(fenetre_pseudo, text="Valider", command=self.recupere_pseudos)
-                bouton_valider_pseudo.pack()
+                bouton_valider_pseudo.grid(column=500)
 
-                self.bouton_recommencer = Button(fenetre_pseudo, text="Recommencer", command=lambda:self.recommencer_partie())
-                self.bouton_recommencer.pack()
+                label_instruction = Label(fenetre_pseudo, text="\n Choissisez le mode de jeu :")
+                label_instruction.grid(column=500)
+
+                bouton_valider_Strict = Button(fenetre_pseudo, text="Mode Strict", command=self.recupere_mode_strict)
+                bouton_valider_Strict.grid(column=500)
+
+                bouton_valider_Mediane = Button(fenetre_pseudo, text="Mode Mediane", command=self.recupere_mode_mediane)
+                bouton_valider_Mediane.grid(column=500)
+
+                bouton_valider_Moyenne = Button(fenetre_pseudo, text="Mode Moyenne", command=self.recupere_mode_moyenne)
+                bouton_valider_Moyenne.grid(column=500)
+
+                bouton_valider_Majorite_Abs = Button(fenetre_pseudo, text="Mode Majorité Absolue", command=self.recupere_mode_maj_abs)
+                bouton_valider_Majorite_Abs.grid(column=500)
+
+                bouton_valider_Majorite_rel = Button(fenetre_pseudo, text="Mode Majorité Relative", command=self.recupere_mode_maj_rel)
+                bouton_valider_Majorite_rel.grid(column=500)
+
+                label_instruction = Label(fenetre_pseudo, text="\n Vous vous êtes trompés :")
+                label_instruction.grid(column=500)
+
+                self.bouton_recommencer = Button(fenetre_pseudo, text="Recommencer la partie", command=lambda:self.recommencer_partie())
+                self.bouton_recommencer.grid(column=500)
 
                 self.master.withdraw()
                 
@@ -99,67 +113,50 @@ class Application:
 
         else : 
             messagebox.showerror("/!\ Erreur","Veuillez saisir un nombre entier")
-
-    def recupere_mode(self):
-        # Récupérer ici le mode de jeu sélectionné
-
-        print("arriver")
     
-        print("arriver")
-        self.mode_jeu = self.frame_mode_jeu.get(self.frame_mode_jeu.curselection())
-        print("arriver")
-        self.mode=self.mode_jeu
-        print("Mode de jeu:", self.mode_jeu)
-        
-
-        if self.tour_actuel == 1:
-            # Au premier tour, utiliser toujours le mode strict
-            self.mode = "Strict"
+    def recupere_mode_strict(self):
 
         # Cas pour le mode strict
-        if self.mode_jeu == "Strict":
-            fenetre_strict=Tk()
-            fenetre_strict.title("Mode Strict")
+    
+        fenetre_strict=Tk()
+        fenetre_strict.title("Mode Strict")
 
-            # Instance de la classe Mode_Strict
-            instance_stricte = Mode_Strict(fenetre_strict, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
-            fenetre_strict.mainloop()
+        # Instance de la classe Mode_Strict
+        instance_stricte = Mode_Strict(fenetre_strict, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
+        fenetre_strict.mainloop()
 
-        # Cas pour le mode Moyenne
-        elif self.mode_jeu == "Moyenne":
-            fenetre_moyenne=Tk()
-            fenetre_moyenne.title("Mode Moyenne")
-
-            # Instance de la classe Mode_Moyenne
-            instance_moyenne = Mode_Moyenne(fenetre_moyenne, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
-            fenetre_moyenne.mainloop()
-
-        # Cas pour le mode Médiane
-        elif self.mode_jeu == "Médiane":
+    def recupere_mode_mediane(self):    
             fenetre_mediane=Tk()
             fenetre_mediane.title("Mode Médiane")
 
-            # Instance de la classe Mode_Médiane
+            # Instance de la classe Mode_Mediane
             instance_mediane = Mode_Mediane(fenetre_mediane, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
             fenetre_mediane.mainloop()
 
-        # Cas pour la majorité absolue
-        elif self.mode_jeu == "Majorité absolue":
-            fenetre_maj_abs=Tk()
-            fenetre_maj_abs.title("Mode Majorité Absolue")
+    def recupere_mode_moyenne(self):    
+        fenetre_moyenne=Tk()
+        fenetre_moyenne.title("Mode Moyenne")
 
-            # Instance de la classe Mode_Majorité_Absolue
-            instance_maj_abs = Mode_Majorite_Absolue(fenetre_maj_abs, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
-            fenetre_maj_abs.mainloop()
+        # Instance de la classe Mode_Moyenne
+        instance_moy = Mode_Moyenne(fenetre_moyenne, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
+        fenetre_moyenne.mainloop()
+    
+    def recupere_mode_maj_abs(self):    
+        fenetre_maj_abs=Tk()
+        fenetre_maj_abs.title("Mode Majorité Absolue")
 
-        # Cas pour la majorité relative
-        elif self.mode_jeu == "Majorité relative":
-            fenetre_maj_rel=Tk()
-            fenetre_maj_rel.title("Mode Majorité relative")
+        # Instance de la classe Mode_Majorite_Absolue
+        instance_maj_abs = Mode_Majorite_Absolue(fenetre_maj_abs, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
+        fenetre_maj_abs.mainloop()
+    
+    def recupere_mode_maj_rel(self):    
+        fenetre_maj_rel=Tk()
+        fenetre_maj_rel.title("Mode Majorité Relative")
 
-            # Instance de la classe Mode_Majorité_Relative
-            instance_maj_rel = Mode_Majorite_Relative(fenetre_maj_rel, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
-            fenetre_maj_rel.mainloop()
+        # Instance de la classe Mode_Majorite_Relative
+        instance_maj_rel = Mode_Majorite_Relative(fenetre_maj_rel, self.list_pseudos,self.nb_joueurs,self.fenetre_pseudo)
+        fenetre_maj_rel.mainloop()
+
 
     def recupere_nb_joueur(self):
 
@@ -188,7 +185,7 @@ class Application:
         
     
         # Appeler la méthode recupere_mode
-        self.recupere_mode()
+        #self.recupere_mode()
         
     def recommencer_partie(self):
         # Destruction de la fenêtre actuelle
@@ -293,12 +290,16 @@ class Mode_Strict():
         # Définition de la liste contenant les valeurs des boutons
         liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
 
+
         # Définition des boutons de vote
         for k in (pseudo) :
             for i, value in enumerate(liste_valeur):
                 for j in range(int(nb)) :    
+                        # Création du label pour chaque joueur
                         self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
                         self.label_pseudo.grid(row=0, column=10+j+10)
+
+                        # Création des boutons
                         button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation(v, int(nb)))
                         button.grid(row=i + 1, column=10+j+10)
         
@@ -569,7 +570,7 @@ class Mode_Mediane(Mode_Strict):
         master.title("Mode Médiane")        
 
         # Pour stocker les estimations
-        self.estimation=[]
+        self.estimation=[]            
 
         # Stockage du nombre de joueur dans une variable
         self.nb=int(nb)
