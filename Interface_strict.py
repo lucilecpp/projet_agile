@@ -1,4 +1,4 @@
-from tkinter import Tk, Listbox, StringVar, Button, Entry, messagebox, Label, scrolledtext, Toplevel
+from tkinter import Tk, StringVar, Button, Entry, messagebox, Label, scrolledtext, Toplevel, PhotoImage
 import tkinter as tk
 import os
 import json
@@ -73,40 +73,41 @@ class Application:
                     self.liste_values.append(value)
                 
                     self.label_pseudo = Label(fenetre_pseudo, text="Entrez le pseudo :")
-                    self.label_pseudo.grid(column=500)
+                    self.label_pseudo.pack()
                     entree = Entry(fenetre_pseudo, textvariable=value, width=30)
-                    entree.grid(column=500)
+                    entree.pack()
                 
                 label_instruction = Label(fenetre_pseudo, text="\n Veuillez valider les pseudos avant de choisir le mode de jeu :")
-                label_instruction.grid(column=500)
+                label_instruction.pack()
                 
-                bouton_valider_pseudo = Button(fenetre_pseudo, text="Valider", command=self.recupere_pseudos)
-                bouton_valider_pseudo.grid(column=500)
+                self.bouton_valider_pseudo = Button(fenetre_pseudo, text="Valider",command=self.recupere_pseudos)
+                self.bouton_valider_pseudo.pack()
 
                 label_instruction = Label(fenetre_pseudo, text="\n Choissisez le mode de jeu :")
-                label_instruction.grid(column=500)
+                label_instruction.pack()
 
                 bouton_valider_Strict = Button(fenetre_pseudo, text="Mode Strict", command=self.recupere_mode_strict)
-                bouton_valider_Strict.grid(column=500)
+                bouton_valider_Strict.pack()
 
                 bouton_valider_Mediane = Button(fenetre_pseudo, text="Mode Mediane", command=self.recupere_mode_mediane)
-                bouton_valider_Mediane.grid(column=500)
+                bouton_valider_Mediane.pack()
 
                 bouton_valider_Moyenne = Button(fenetre_pseudo, text="Mode Moyenne", command=self.recupere_mode_moyenne)
-                bouton_valider_Moyenne.grid(column=500)
+                bouton_valider_Moyenne.pack()
 
                 bouton_valider_Majorite_Abs = Button(fenetre_pseudo, text="Mode Majorité Absolue", command=self.recupere_mode_maj_abs)
-                bouton_valider_Majorite_Abs.grid(column=500)
+                bouton_valider_Majorite_Abs.pack()
 
                 bouton_valider_Majorite_rel = Button(fenetre_pseudo, text="Mode Majorité Relative", command=self.recupere_mode_maj_rel)
-                bouton_valider_Majorite_rel.grid(column=500)
+                bouton_valider_Majorite_rel.pack()
 
                 label_instruction = Label(fenetre_pseudo, text="\n Vous vous êtes trompés :")
-                label_instruction.grid(column=500)
+                label_instruction.pack()
 
                 self.bouton_recommencer = Button(fenetre_pseudo, text="Recommencer la partie", command=lambda:self.recommencer_partie())
-                self.bouton_recommencer.grid(column=500)
+                self.bouton_recommencer.pack()
 
+                # Masque la fenêtre du nombre de joueur
                 self.master.withdraw()
                 
             else : messagebox.showerror("/!\ Erreur","Il faut entre 1 et 6 joueurs")
@@ -117,7 +118,6 @@ class Application:
     def recupere_mode_strict(self):
 
         # Cas pour le mode strict
-    
         fenetre_strict=Tk()
         fenetre_strict.title("Mode Strict")
 
@@ -181,8 +181,10 @@ class Application:
         print("Pseudos:", pseudos)
         self.fenetre_pseudo = self.bouton_valider.winfo_toplevel()
         self.bouton_recommencer = Button(self.master, text="Recommencer", command=lambda:self.recommencer_partie())
-        self.bouton_recommencer.pack()     
-    
+        self.bouton_recommencer.pack()
+
+        self.bouton_valider_pseudo.configure(bg="#82977e", fg="white")
+
         
     def recommencer_partie(self):
         # Destruction de la fenêtre actuelle
@@ -271,8 +273,8 @@ class Mode_Strict(Application):
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        self.label_description.grid
-        self.entree_description.grid
+        self.label_description.grid()
+        self.entree_description.grid()
 
         bouton_sauvegarder.grid()
 
@@ -287,6 +289,16 @@ class Mode_Strict(Application):
         # Définition de la liste contenant les valeurs des boutons
         liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
 
+        c=Toplevel()
+        c.title("drtujws")
+        # Créer un objet photoimage pour utiliser l'image
+        photo = PhotoImage(file = "C://Users//luperbet//Downloads//projet_agile-main//ppp.png") 
+
+        # Ajouter l'image dans le bouton 
+        a=Button(c, image=photo)
+        a.grid(row=999, column=999) 
+
+        c.mainloop()
 
         # Définition des boutons de vote
         for k in (pseudo) :
