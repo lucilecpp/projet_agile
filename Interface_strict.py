@@ -40,10 +40,6 @@ class Application:
         # Valider le choix du nombre de joueur
         self.bouton_valider = Button(master, text="Valider", command=lambda : self.entrer_pseudos())
         self.bouton_valider.pack()
-
-        # Création d'un bouton pour recommencer la partie
-        self.bouton_recommencer = Button(master, text="Recommencer", command=lambda:self.recommencer_partie())
-        self.bouton_recommencer.pack()
         
 
     def entrer_pseudos(self):
@@ -58,11 +54,11 @@ class Application:
 
             # Vérification du nombre de joueur
             if 1 <= self.nb_joueurs <= 6:
-                fenetre_pseudo = Toplevel(self.master)
+                self.fenetre_pseudo = Toplevel(self.master)
 
                 # Aggrandir la fenêtre
-                taille_ecran(fenetre_pseudo)
-                fenetre_pseudo.title("Pseudo")
+                taille_ecran(self.fenetre_pseudo)
+                self.fenetre_pseudo.title("Pseudo")
 
                 # Utiliser une liste pour stocker les StringVar
                 self.liste_values = []
@@ -72,40 +68,38 @@ class Application:
                     value = StringVar()
                     self.liste_values.append(value)
                 
-                    self.label_pseudo = Label(fenetre_pseudo, text="Entrez le pseudo :")
+                    self.label_pseudo = Label(self.fenetre_pseudo, text="Entrez le pseudo :")
                     self.label_pseudo.pack()
-                    entree = Entry(fenetre_pseudo, textvariable=value, width=30)
+                    entree = Entry(self.fenetre_pseudo, textvariable=value, width=30)
                     entree.pack()
                 
-                label_instruction = Label(fenetre_pseudo, text="\n Veuillez valider les pseudos avant de choisir le mode de jeu :")
-                label_instruction.pack()
-                
-                self.bouton_valider_pseudo = Button(fenetre_pseudo, text="Valider",command=self.recupere_pseudos)
+            
+                self.bouton_valider_pseudo = Button(self.fenetre_pseudo, text="Valider",command=self.recupere_pseudos)
                 self.bouton_valider_pseudo.pack()
 
-                label_instruction = Label(fenetre_pseudo, text="\n Choissisez le mode de jeu :")
-                label_instruction.pack()
+                self.label_instruction = Label(self.fenetre_pseudo, text="\n Choissisez le mode de jeu :")
+                self.label_instruction.pack_forget()
 
-                bouton_valider_Strict = Button(fenetre_pseudo, text="Mode Strict", command=self.recupere_mode_strict)
-                bouton_valider_Strict.pack()
+                self.bouton_valider_Strict = Button(self.fenetre_pseudo, text="Mode Strict", command=self.recupere_mode_strict)
+                self.bouton_valider_Strict.pack_forget()
 
-                bouton_valider_Mediane = Button(fenetre_pseudo, text="Mode Mediane", command=self.recupere_mode_mediane)
-                bouton_valider_Mediane.pack()
+                self.bouton_valider_Mediane = Button(self.fenetre_pseudo, text="Mode Mediane", command=self.recupere_mode_mediane)
+                self.bouton_valider_Mediane.pack_forget()
 
-                bouton_valider_Moyenne = Button(fenetre_pseudo, text="Mode Moyenne", command=self.recupere_mode_moyenne)
-                bouton_valider_Moyenne.pack()
+                self.bouton_valider_Moyenne = Button(self.fenetre_pseudo, text="Mode Moyenne", command=self.recupere_mode_moyenne)
+                self.bouton_valider_Moyenne.pack_forget()
 
-                bouton_valider_Majorite_Abs = Button(fenetre_pseudo, text="Mode Majorité Absolue", command=self.recupere_mode_maj_abs)
-                bouton_valider_Majorite_Abs.pack()
+                self.bouton_valider_Majorite_Abs = Button(self.fenetre_pseudo, text="Mode Majorité Absolue", command=self.recupere_mode_maj_abs)
+                self.bouton_valider_Majorite_Abs.pack_forget()
 
-                bouton_valider_Majorite_rel = Button(fenetre_pseudo, text="Mode Majorité Relative", command=self.recupere_mode_maj_rel)
-                bouton_valider_Majorite_rel.pack()
+                self.bouton_valider_Majorite_rel = Button(self.fenetre_pseudo, text="Mode Majorité Relative", command=self.recupere_mode_maj_rel)
+                self.bouton_valider_Majorite_rel.pack_forget()
 
-                label_instruction = Label(fenetre_pseudo, text="\n Vous vous êtes trompés :")
-                label_instruction.pack()
+                self.label_instruction_partie = Label(self.fenetre_pseudo, text="\n Vous vous êtes trompés :")
+                self.label_instruction_partie.pack(anchor="center")
 
-                self.bouton_recommencer = Button(fenetre_pseudo, text="Recommencer la partie", command=lambda:self.recommencer_partie())
-                self.bouton_recommencer.pack()
+                self.bouton_recommencer = Button(self.fenetre_pseudo, text="Recommencer la partie", command=lambda:self.recommencer_partie())
+                self.bouton_recommencer.pack(anchor="center")
 
                 # Masque la fenêtre du nombre de joueur
                 self.master.withdraw()
@@ -183,9 +177,17 @@ class Application:
         self.bouton_recommencer = Button(self.master, text="Recommencer", command=lambda:self.recommencer_partie())
         self.bouton_recommencer.pack()
 
+        # Passage du bouton en vert pour montrer qu'il a été validé
         self.bouton_valider_pseudo.configure(bg="#82977e", fg="white")
 
-        
+        # Apparition des boutons pour le choix du mode
+        self.label_instruction.pack()
+        self.bouton_valider_Strict.pack()
+        self.bouton_valider_Mediane.pack()
+        self.bouton_valider_Moyenne.pack()
+        self.bouton_valider_Majorite_Abs.pack()
+        self.bouton_valider_Majorite_rel.pack()
+
     def recommencer_partie(self):
         # Destruction de la fenêtre actuelle
         self.master.destroy()
@@ -195,9 +197,11 @@ class Application:
         app = Application(fenetre)
         fenetre.mainloop()
 
+        # Efface les données du json
         self.effacer_donnee_json()
 
     def effacer_donnee_json(self):
+
         # Effacer les données du fichier JSON
         with open("donnees.json", "w") as fichier_json:
             json.dump({"tableau": []}, fichier_json, indent=4)
@@ -210,8 +214,15 @@ class Mode_Strict(Application):
         taille_ecran(master)
         master.title("Mode Strict")        
 
+        # Stocker les pseudos et le nombre de joueur
+        self.pseudo=pseudo
+        self.nb=int(nb)
+
         # Pour stocker les estimations
         self.estimation=[]
+
+        # Variable pour connaître l'affichage de la partie
+        self.indice_rec=0
         
         # Pour créer le json s'il n'est pas déjà présent
         self.creer_fichier_json()
@@ -251,20 +262,19 @@ class Mode_Strict(Application):
         self.entree_description.grid()
 
         # Création d'un bouton pour sauvegarder les données
-        bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:self.sauvegarder_donnees())
+        self.bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:self.sauvegarder_donnees())
 
         # Création d'un bouton pour entrer une tâche
-        bouton_tache=Button(master, text="Tâche suivante", command=lambda:self.tache_suivante())
+        self.bouton_tache=Button(master, text="Tâche suivante", command=lambda:self.tache_suivante())
 
         # Création d'un bouton pour recommencer la partie
-        bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:self.recommencer_partie_mode())
+        self.bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:self.recommencer_partie_mode())
 
         # Création d'un bouton pour afficher les données du json
-        bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:self.afficher_donnees_json())
+        self.bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:self.afficher_donnees_json())
 
         # Bouton pour mettre fin à la partie
-        bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :self.fin_de_partie(fenetre))
-
+        self.bouton_fin_de_partie = Button(master, text="Fin de la partie", command=lambda :self.fin_de_partie(fenetre))
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
         self.label_num.grid()
@@ -276,74 +286,49 @@ class Mode_Strict(Application):
         self.label_description.grid()
         self.entree_description.grid()
 
-        bouton_sauvegarder.grid()
+        self.bouton_sauvegarder.grid()
 
-        bouton_tache.grid()
+        self.bouton_tache.grid_forget()
 
-        bouton_recommencer.grid()
+        self.bouton_recommencer.grid()
 
-        bouton_afficher_json.grid()
+        self.bouton_afficher_json.grid()
 
-        bouton_fin_de_partie.grid()
+        self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
-
-        c=Toplevel()
-        c.title("drtujws")
-        # Créer un objet photoimage pour utiliser l'image
-        photo = PhotoImage(file = "C://Users//luperbet//Downloads//projet_agile-main//ppp.png") 
-
-        # Ajouter l'image dans le bouton 
-        a=Button(c, image=photo)
-        a.grid(row=999, column=999) 
-
-        c.mainloop()
-
-        # Définition des boutons de vote
-        for k in (pseudo) :
-            for i, value in enumerate(liste_valeur):
-                for j in range(int(nb)) :    
-                        # Création du label pour chaque joueur
-                        self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
-                        self.label_pseudo.grid(row=0, column=10+j+10)
-
-                        # Création des boutons
-                        button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation(v, int(nb)))
-                        button.grid(row=i + 1, column=10+j+10)
+        self.liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
         
-    def vote_estimation(self, valeur, nb_j):
+    def vote_estimation(self, valeur):
 
         if valeur =="Pause":
             self.pause()
         else : 
+            
             # Stockage des informations dans la liste estimation
             self.estimation.append(valeur)
-            print(self.estimation)
 
-            if len(self.estimation)==nb_j:
+            if len(self.estimation)==self.nb:
                 self.sauvegarder_estimation()
-            else:
-                pass
-    
+                
     def verif_regle(self):
 
-        # Initiation d'une variable pour connaitre le statut de la fonction
+        # Initiation d'une variable pour connaître le statut de la fonction
         indice=False
 
         # Suppression des doublons
         self.estimation_final = set(self.estimation)
 
-        # Vérification de la longueur de la liste soit égale à 1"
+        # Vérification de la longueur de la liste soit égale à 1
         if len(self.estimation_final)==1:
             print(self.estimation_final, len(self.estimation_final))
             indice=True
-        else : 
-            print("Y a un souci", len(self.estimation_final))
+        else:
             messagebox.showinfo("Attention","La règle stricte n'est pas respectée. \n Veuillez recommencez")
 
             # Passage de la liste des estimations à vides pour recommencer
             self.estimation=[]
+
         return indice
 
     def sauvegarder_estimation(self):    
@@ -361,6 +346,26 @@ class Mode_Strict(Application):
                     json.dump(donnees_existantes, fichier_json, indent=4)
                 messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
                 
+                # Activer le clignotement du bouton tache suivante
+                self.clignoter(True)
+    
+    def clignoter(self, statut):
+        etat_clignotement=statut
+        couleur = self.bouton_tache.cget("bg")
+        
+        if couleur == "#ececec":
+            self.bouton_tache.configure(bg="#82977e", fg="white")
+        else:
+            self.bouton_tache.configure(bg="#ececec", fg="black")
+        
+        if etat_clignotement==True:            
+            self.clignotement_id = self.master.after(500, self.clignoter,True)
+        else:
+            # Annulation de l'appel récurrent de la fonction clignoter
+            self.master.after_cancel(self.clignotement_id)
+            self.bouton_tache.configure(bg="#ececec", fg="black")
+
+                
     def creer_fichier_json(self):
             chemin_fichier = "donnees.json"
             if not os.path.exists(chemin_fichier):
@@ -368,7 +373,7 @@ class Mode_Strict(Application):
                     json.dump({"tableau": []}, fichier_json, indent=4)
 
     def sauvegarder_donnees(self):
-        print("Sauv dans le Json")
+
         # Récupérer les données depuis les zones de texte
         num = self.entree_num.get()
         nom = self.entree_nom.get()
@@ -385,8 +390,33 @@ class Mode_Strict(Application):
         # Sauvegarder les données mises à jour dans le fichier JSON
         with open("donnees.json", "w") as fichier_json:
             json.dump(donnees_existantes, fichier_json, indent=4)
+        
+        # Apparition de bouton tâche suivante
+        self.bouton_tache.grid()
 
+        # Changement de couleur pour le bouton sauvegarder
+        self.bouton_sauvegarder.configure(bg="#82977e", fg="white")
+
+        self.appel_bouton()
+
+        # Apparition de bouton tâche suivante
+        self.bouton_tache.grid()
+    
+    def appel_bouton(self):
+        # Définition des boutons de vote
+        self.boutons_vote = []
+        for j, k in enumerate(self.pseudo):
+            for i, value in enumerate(self.liste_valeur):
+                label_pseudo = Label(self.master, text=f"A \n {k} \n de voter")
+                label_pseudo.grid(row=0, column=10 + j + 10)
+                button_vote = Button(self.master, text=value, command=lambda v=value: self.vote_estimation(v))
+                button_vote.grid(row=i + 1, column=10 + j + 10)
+                self.boutons_vote.append(button_vote)
+        
     def recommencer_partie_mode(self):
+
+        # Initialisation d'une variable pour connaître le statut de la partie
+        self.indice_rec=1
 
         # Appel de la fonction tache_suivante pour réinitisaliser les paramètres de l'interface
         self.tache_suivante()
@@ -409,6 +439,23 @@ class Mode_Strict(Application):
         self.entree_nom.delete(0, tk.END)
         self.entree_description.delete(0, tk.END)
         self.estimation=[]
+
+        if self.indice_rec!=1:    
+            
+            # Disparition du bouton tâche suivante
+            self.bouton_tache.grid_forget()
+
+            # Passage du bouton sauvegarder en couleur classique
+            self.bouton_sauvegarder.configure(bg="#ececec", fg="black")
+
+            # Dispairiton des boutons de vote
+            for i in self.boutons_vote:
+                i.grid_forget()
+        
+            # Désactiver le clignotement du bouton tache suivante
+            self.clignoter(False)
+        else: 
+             pass
 
         # Incrémentation de la variable tour_actuel
         Application.tour_actuel+=1
@@ -446,8 +493,14 @@ class Mode_Moyenne(Mode_Strict):
         # Pour stocker les estimations
         self.estimation=[]
 
+        # Pour stocker les pseudos
+        self.pseudo=pseudo
+
         # Stockage du nombre de joueur dans une variable
         self.nb=int(nb)
+
+        # Variable pour connaître l'affichage de la partie
+        self.indice_rec=0
 
 
         # Création d'une zone de texte extensible en tant que bloc-note
@@ -485,19 +538,19 @@ class Mode_Moyenne(Mode_Strict):
         self.entree_description.grid()
 
         # Création d'un bouton pour sauvegarder les données
-        bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
+        self.bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
 
         # Création d'un bouton pour entrer une tâche
-        bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
+        self.bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
 
         # Création d'un bouton pour recommencer la partie
-        bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
+        self.bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
 
         # Création d'un bouton pour afficher les données du json
-        bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
+        self.bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
 
         # Bouton pour mettre fin à la partie
-        bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
+        self.bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
 
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
@@ -510,28 +563,19 @@ class Mode_Moyenne(Mode_Strict):
         self.label_description.grid
         self.entree_description.grid
 
-        bouton_sauvegarder.grid()
+        self.bouton_sauvegarder.grid()
 
-        bouton_tache.grid()
+        self.bouton_tache.grid_forget()
 
-        bouton_recommencer.grid()
+        self.bouton_recommencer.grid()
 
-        bouton_afficher_json.grid()
+        self.bouton_afficher_json.grid()
 
-        bouton_fin_de_partie.grid()
+        self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
+        self.liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
 
-        # Définition des boutons de vote
-        for k in (pseudo) :
-            for i, value in enumerate(liste_valeur):
-                for j in range(int(nb)) :    
-                        self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
-                        self.label_pseudo.grid(row=0, column=10+j+10)
-                        button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_moyenne(v))
-                        button.grid(row=i + 1, column=10+j+10)
-        
     def vote_estimation_moyenne(self, valeur):
        
         if valeur =="Pause":
@@ -571,6 +615,21 @@ class Mode_Moyenne(Mode_Strict):
                     json.dump(donnees_existantes, fichier_json, indent=4)
                 messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
+                # Activation de la fonction clignoter
+                self.clignoter(True)
+
+    def appel_bouton(self):
+
+        # Définition des boutons de vote
+        self.boutons_vote = []
+        for j, k in enumerate(self.pseudo):
+            for i, value in enumerate(self.liste_valeur):
+                label_pseudo = Label(self.master, text=f"A \n {k} \n de voter")
+                label_pseudo.grid(row=0, column=10 + j + 10)
+                button_vote = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_moyenne(v))
+                button_vote.grid(row=i + 1, column=10 + j + 10)
+                self.boutons_vote.append(button_vote)
+
 class Mode_Mediane(Mode_Strict):
     def __init__(self, master, pseudo, nb, fenetre) :
         
@@ -583,6 +642,12 @@ class Mode_Mediane(Mode_Strict):
 
         # Stockage du nombre de joueur dans une variable
         self.nb=int(nb)
+
+        # Stockage des pseudos dans une variable
+        self.pseudo=pseudo
+
+        # Variable pour connaître l'affichage de la partie
+        self.indice_rec=0
 
         # Création d'une zone de texte extensible en tant que bloc-note
         self.zone_texte = scrolledtext.ScrolledText(master, wrap=tk.WORD, width=40, height=10)
@@ -619,19 +684,19 @@ class Mode_Mediane(Mode_Strict):
         self.entree_description.grid()
 
         # Création d'un bouton pour sauvegarder les données
-        bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
+        self.bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
 
         # Création d'un bouton pour entrer une tâche
-        bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
+        self.bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
 
         # Création d'un bouton pour recommencer la partie
-        bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
+        self.bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
 
         # Création d'un bouton pour afficher les données du json
-        bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
+        self.bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
 
         # Bouton pour mettre fin à la partie
-        bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
+        self.bouton_fin_de_partie = Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
 
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
@@ -644,27 +709,18 @@ class Mode_Mediane(Mode_Strict):
         self.label_description.grid
         self.entree_description.grid
 
-        bouton_sauvegarder.grid()
+        self.bouton_sauvegarder.grid()
 
-        bouton_tache.grid()
+        self.bouton_tache.grid_forget()
 
-        bouton_recommencer.grid()
+        self.bouton_recommencer.grid()
 
-        bouton_afficher_json.grid()
+        self.bouton_afficher_json.grid()
 
-        bouton_fin_de_partie.grid()
+        self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
-
-        # Définition des boutons de vote
-        for k in (pseudo) :
-            for i, value in enumerate(liste_valeur):
-                for j in range(int(nb)) :    
-                        self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
-                        self.label_pseudo.grid(row=0, column=10+j+10)
-                        button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_mediane(v))
-                        button.grid(row=i + 1, column=10+j+10)
+        self.liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]        
         
     def vote_estimation_mediane(self, valeur):
        
@@ -704,7 +760,22 @@ class Mode_Mediane(Mode_Strict):
                 with open("donnees.json", "w") as fichier_json:
                     json.dump(donnees_existantes, fichier_json, indent=4)
                 messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
-                
+
+                # Activation de la fonction clignoter
+                self.clignoter(True)
+
+    def appel_bouton(self):
+
+            # Définition des boutons de vote
+            self.boutons_vote = []
+            for j, k in enumerate(self.pseudo):
+                for i, value in enumerate(self.liste_valeur):
+                    label_pseudo = Label(self.master, text=f"A \n {k} \n de voter")
+                    label_pseudo.grid(row=0, column=10 + j + 10)
+                    button_vote = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_mediane(v))
+                    button_vote.grid(row=i + 1, column=10 + j + 10)
+                    self.boutons_vote.append(button_vote)
+
 class Mode_Majorite_Absolue(Mode_Strict):
     def __init__(self, master, pseudo, nb, fenetre) :
         
@@ -717,6 +788,12 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
         # Stockage du nombre de joueur dans une variable
         self.nb=int(nb)
+
+        # Variable pour connaître l'affichage de la partie
+        self.indice_rec=0
+
+        # Pour stocker les pseudos
+        self.pseudo=pseudo
 
         # Création d'une zone de texte extensible en tant que bloc-note
         self.zone_texte = scrolledtext.ScrolledText(master, wrap=tk.WORD, width=40, height=10)
@@ -753,19 +830,19 @@ class Mode_Majorite_Absolue(Mode_Strict):
         self.entree_description.grid()
 
         # Création d'un bouton pour sauvegarder les données
-        bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
+        self.bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
 
         # Création d'un bouton pour entrer une tâche
-        bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
+        self.bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
 
         # Création d'un bouton pour recommencer la partie
-        bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
+        self.bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
 
         # Création d'un bouton pour afficher les données du json
-        bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
+        self.bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
 
         # Bouton pour mettre fin à la partie
-        bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
+        self.bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
 
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
@@ -778,27 +855,19 @@ class Mode_Majorite_Absolue(Mode_Strict):
         self.label_description.grid
         self.entree_description.grid
 
-        bouton_sauvegarder.grid()
+        self.bouton_sauvegarder.grid()
 
-        bouton_tache.grid()
+        self.bouton_tache.grid_forget()
 
-        bouton_recommencer.grid()
+        self.bouton_recommencer.grid()
 
-        bouton_afficher_json.grid()
+        self.bouton_afficher_json.grid()
 
-        bouton_fin_de_partie.grid()
+        self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
+        self.liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
 
-        # Définition des boutons de vote
-        for k in (pseudo) :
-            for i, value in enumerate(liste_valeur):
-                for j in range(int(nb)) :    
-                        self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
-                        self.label_pseudo.grid(row=0, column=10+j+10)
-                        button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_majorite_abs(v))
-                        button.grid(row=i + 1, column=10+j+10)
 
     def vote_estimation_majorite_abs(self, valeur):
        
@@ -814,8 +883,8 @@ class Mode_Majorite_Absolue(Mode_Strict):
             if valeur == "Ne Sais Pas":
                 self.nb -= 1
 
-            len(self.estimation) == self.nb
-            self.sauvegarder_estimation_majorite_abs()
+            if len(self.estimation) == self.nb:
+                self.sauvegarder_estimation_majorite_abs()
 
     def calcul_majorite_abs(self):
         if len(self.estimation) == self.nb:
@@ -843,6 +912,21 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
             messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
+            # Activation fonction clignotement
+            self.clignoter(True)
+
+    def appel_bouton(self):
+
+        # Définition des boutons de vote
+        self.boutons_vote = []
+        for j, k in enumerate(self.pseudo):
+            for i, value in enumerate(self.liste_valeur):
+                label_pseudo = Label(self.master, text=f"A \n {k} \n de voter")
+                label_pseudo.grid(row=0, column=10 + j + 10)
+                button_vote = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_majorite_abs(v))
+                button_vote.grid(row=i + 1, column=10 + j + 10)
+                self.boutons_vote.append(button_vote)
+
 class Mode_Majorite_Relative(Mode_Strict):
     def __init__(self, master, pseudo, nb, fenetre):
         
@@ -853,8 +937,12 @@ class Mode_Majorite_Relative(Mode_Strict):
         # Pour stocker les estimations
         self.estimation=[]
 
-        # Stockage du nombre de joueur dans une variable
+        # Stockage du nombre de joueur et des pseudos dans une variable
         self.nb=int(nb)
+        self.pseudo=pseudo
+
+        # Variable pour connaître l'affichage de la partie
+        self.indice_rec=0        
 
         # Création d'une zone de texte extensible en tant que bloc-note
         self.zone_texte = scrolledtext.ScrolledText(master, wrap=tk.WORD, width=40, height=10)
@@ -889,19 +977,19 @@ class Mode_Majorite_Relative(Mode_Strict):
         self.entree_description.grid()
 
         # Création d'un bouton pour sauvegarder les données
-        bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
+        self. bouton_sauvegarder = Button(master, text="Sauvegarder", command=lambda:Mode_Strict.sauvegarder_donnees(self))
 
         # Création d'un bouton pour entrer une tâche
-        bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
+        self.bouton_tache=Button(master, text="Tâche suivante", command=lambda:Mode_Strict.tache_suivante(self))
 
         # Création d'un bouton pour recommencer la partie
-        bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
+        self.bouton_recommencer = Button(master, text="Recommencer la partie", command=lambda:Mode_Strict.recommencer_partie_mode(self))
 
         # Création d'un bouton pour afficher les données du json
-        bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
+        self.bouton_afficher_json = Button(master, text="Afficher les données", command=lambda:Mode_Strict.afficher_donnees_json(self))
 
         # Bouton pour mettre fin à la partie
-        bouton_fin_de_partie = tk.Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
+        self.bouton_fin_de_partie = Button(master, text="Fin de la partie", command=lambda :Mode_Strict.fin_de_partie(self, fenetre))
 
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
@@ -914,27 +1002,19 @@ class Mode_Majorite_Relative(Mode_Strict):
         self.label_description.grid
         self.entree_description.grid
 
-        bouton_sauvegarder.grid()
+        self.bouton_sauvegarder.grid()
 
-        bouton_tache.grid()
+        self.bouton_tache.grid_forget()
 
-        bouton_recommencer.grid()
+        self.bouton_recommencer.grid()
 
-        bouton_afficher_json.grid()
+        self.bouton_afficher_json.grid()
 
-        bouton_fin_de_partie.grid()
+        self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
-
-        # Définition des boutons de vote
-        for k in (pseudo) :
-            for i, value in enumerate(liste_valeur):
-                for j in range(int(nb)) :    
-                        self.label_pseudo = Label(master, text=f"A \n {k} \n de voter")
-                        self.label_pseudo.grid(row=0, column=10+j+10)
-                        button = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_majorite_rel(v))
-                        button.grid(row=i + 1, column=10+j+10)
+        self.liste_valeur=[0,1,2,3,5,8,13,20,40,100,"Ne Sais Pas", "Pause"]
+        
 
     def vote_estimation_majorite_rel(self, valeur):
        
@@ -950,20 +1030,20 @@ class Mode_Majorite_Relative(Mode_Strict):
             if valeur == "Ne Sais Pas":
                 self.nb -= 1
 
-            len(self.estimation) == self.nb
-            self.sauvegarder_estimation_majorite_rel()
+            if len(self.estimation) == self.nb:
+                self.sauvegarder_estimation_majorite_rel()
         
 
     def calcul_majorite_rel(self):
 
-        # Compteur des estimations
-        compteur_estimations = Counter(self.estimation)
+        if len(self.estimation)==self.nb: # Compteur des estimations
+            compteur_estimations = Counter(self.estimation)
 
-        # Les éléments sont triées par ordre décroissantes
-        estimations_triees = sorted(compteur_estimations.items(), key=lambda x: x[1], reverse=True)
+            # Les éléments sont triées par ordre décroissantes
+            estimations_triees = sorted(compteur_estimations.items(), key=lambda x: x[1], reverse=True)
 
-        # Stockage de la valeur la plus fréquente
-        valeur_majoritaire = estimations_triees[0]
+            # Stockage de la valeur la plus fréquente
+            valeur_majoritaire = estimations_triees[0]
 
         return valeur_majoritaire
     
@@ -982,6 +1062,20 @@ class Mode_Majorite_Relative(Mode_Strict):
         
         messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
+        # Activation clignotement bouton tache
+        self.clignoter(True)
+
+    def appel_bouton(self):
+
+        # Définition des boutons de vote
+        self.boutons_vote = []
+        for j, k in enumerate(self.pseudo):
+            for i, value in enumerate(self.liste_valeur):
+                label_pseudo = Label(self.master, text=f"A \n {k} \n de voter")
+                label_pseudo.grid(row=0, column=10 + j + 10)
+                button_vote = Button(self.master, text=value, command=lambda v=value: self.vote_estimation_majorite_rel(v))
+                button_vote.grid(row=i + 1, column=10 + j + 10)
+                self.boutons_vote.append(button_vote)
 
 if __name__ == "__main__":
     root = Tk()
