@@ -53,7 +53,7 @@ Quelques informations sur l'interface et les règles de ce jeu :
  - Majorité aboslue : La majorité absolue des estimations des joueurs correspond à l'estimation finale.
  - Majorité relative : La majorité relative des estimations des joueurs correspond à l'estimation finale.
 
-### Les règles 
+#### Les règles 
 
  Pour que la partie se déroule correctement il faut suivres les instructions suivantes : 
  - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description.  
