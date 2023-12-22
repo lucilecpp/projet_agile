@@ -1,9 +1,16 @@
 import unittest
 from unittest.mock import patch
 from tkinter import Tk
-from Interface1 import Mode_Strict
 import json
+import os
 
+'''def effacer_donnees_json(self):
+    # Effacer les données dans le fichier JSON s'il n'est pas vide
+    if os.path.exists("donnees.json") and os.path.getsize("donnees.json") > 0:
+        with open("donnees.json", "w") as fichier_json:
+            fichier_json.write("")'''
+            
+from Interface1 import Mode_Strict
 class TestModeStrict(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
@@ -27,6 +34,7 @@ class TestModeStrict(unittest.TestCase):
         self.mode_strict.entree_description.insert(0, "Description1")
 
         # Appeler la méthode sauvegarder_donnees
+        print("\nTest mode strict :")
         self.mode_strict.sauvegarder_donnees()
 
         # Vérifier que les données sont correctement sauvegardées dans le fichier JSON
@@ -54,11 +62,14 @@ from Interface1 import Mode_Moyenne
 class TestModeMoyenne(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+        self.root.withdraw()
         self.mode_moyenne = Mode_Moyenne(self.root, ["John", "Alice", "Margot"], 3, self.root)
         self.mode_moyenne.estimation = [5, 8, 13]
 
     def tearDown(self):
-        self.root.destroy()
+        # Détruire la fenêtre seulement si elle existe encore
+        if self.root.winfo_exists():
+            self.root.destroy()
 
     def test_vote_estimation_moyenne(self):
         # Simuler le vote avec une valeur
@@ -68,20 +79,17 @@ class TestModeMoyenne(unittest.TestCase):
         self.assertEqual(self.mode_moyenne.estimation, [8])
 
     def test_calcul_moyenne(self):
-        # Assurer que la variable estimation est correctement initialisée
-        #print("Estimation avant le test :", len(self.mode_moyenne.estimation))
+        print("\nTest estimation moyenne :")
 
         # Appeler la méthode de calcul de moyenne
         moyenne = self.mode_moyenne.calcul_moyenne()
-
+        
         # Assurer que la moyenne est calculée correctement
-        #print("Moyenne apres le test :", moyenne)
         self.assertEqual(moyenne, 8.666666666666666)
 
     @patch("Interface1.messagebox.showinfo")
     def test_sauvegarder_estimation_moyenne(self, mock_showinfo):
         self.mode_moyenne.sauvegarder_estimation_moyenne()
-
         # Vérifier que la boîte d'information est appelée
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
@@ -89,6 +97,7 @@ from Interface1 import Mode_Mediane
 class TestModeMediane(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+        self.root.withdraw()
         self.mode_mediane = Mode_Mediane(self.root, ["John", "Alice", "Margot"], 3, self.root)
         self.mode_mediane.estimation = [5, 8, 13]
 
@@ -105,14 +114,12 @@ class TestModeMediane(unittest.TestCase):
         self.assertEqual(self.mode_mediane.estimation, [8])
 
     def test_calcul_mediane(self):
-        # Assurer que la variable estimation est correctement initialisée
-        #print("Nombre d'estimations:", len(self.mode_mediane.estimation))
+        print("\nTest estimation mediane :")
 
         # Appeler la méthode de calcul de moyenne
         mediane = self.mode_mediane.calcul_mediane()
         
         # Assurer que la mediane est calculée correctement
-        #print("Mediane après le calcul :", mediane)
         self.assertEqual(mediane, 8)
 
 
@@ -120,15 +127,14 @@ class TestModeMediane(unittest.TestCase):
     def test_sauvegarder_estimation_mediane(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_mediane
         self.mode_mediane.sauvegarder_estimation_mediane()
-
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
 from Interface1 import Mode_Majorite_Absolue
-
 class TestModeMajoriteAbsolue(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+        self.root.withdraw()
         self.mode_majorite_absolue = Mode_Majorite_Absolue(self.root, "John", 2, self.root)
         self.mode_majorite_absolue.estimation = [5, 8]
 
@@ -142,27 +148,64 @@ class TestModeMajoriteAbsolue(unittest.TestCase):
         self.mode_majorite_absolue.vote_estimation_majorite_abs(5)
 
         # Vérifier que la valeur a été ajoutée à la liste d'estimation
-        self.assertEqual(self.mode_majorite_absolue.estimation, [5])
+        self.assertEqual(self.mode_majorite_absolue.estimation, [5, 8, 5])
 
 
     def test_calcul_majorite_abs(self):
-        # Assurer que la variable estimation est correctement initialisée
-        #print("Estimation avant le test :", len(self.mode_majorite_absolue.estimation))
+        print("\nTest estimation majorite absolue :")
 
         # Appeler la méthode de calcul de moyenne
         majoriteAbs = self.mode_majorite_absolue.calcul_majorite_abs()
-
         # Assurer que la moyenne est calculée correctement
-        #print("Majorite Abs apres le test :", majoriteAbs)
         self.assertEqual(majoriteAbs, 5)
 
     @patch('Interface1.messagebox.showinfo')
     def test_sauvegarder_estimation_majorite_abs(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_majorite_abs
         self.mode_majorite_absolue.sauvegarder_estimation_majorite_abs()
-
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
+
+from Interface1 import Mode_Majorite_Relative
+class TestModeMajoriteRelative(unittest.TestCase):  
+    def setUp(self):
+        self.root = Tk()
+        # Désactivez la destruction automatique de la fenêtre pendant les tests
+        self.root.withdraw()
+        self.mode_majorite_relative = Mode_Majorite_Relative(self.root, ["John"], 1, self.root)
+        # Simuler des données dans la liste d'estimations
+        self.mode_majorite_relative.estimation = [1, 2, 3, 1, 2, 3, 1, 1]
+
+    def tearDown(self):
+        # Détruire la fenêtre seulement si elle existe encore
+        if self.root.winfo_exists():
+            self.root.destroy()
+
+    def test_vote_estimation_majorite_relative(self):
+            # Simuler le vote
+            self.mode_majorite_relative.vote_estimation_majorite_rel(5)
+
+            # Vérifier que la valeur a été ajoutée à la liste d'estimation
+            self.assertEqual(self.mode_majorite_relative.estimation, [1, 2, 3, 1, 2, 3, 1, 1, 5])
+
+    def test_calcul_majorite_rel(self):
+        print("\nTest estimation majorite relative :")
+        # Testez la méthode calcul_majorite_rel avec une liste d'estimations
+        result = self.mode_majorite_relative.calcul_majorite_rel()
+        self.assertEqual(result, (1, 4))  
+
+    @patch('Interface1.messagebox.showinfo')  # Utilisez le décorateur patch pour mock la fonction showinfo
+    def test_sauvegarder_estimation_majorite_rel(self, mock_showinfo):
+        # Appeler la méthode sauvegarder_estimation_majorite_rel
+        self.mode_majorite_relative.sauvegarder_estimation_majorite_rel()
+        # Vérifier que showinfo a été appelé
+        mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
+
+        # Vérifier que les données sont correctement sauvegardées dans le fichier JSON
+        with open("donnees.json", "r") as fichier_json:
+            donnees = json.load(fichier_json)
+            derniere_donnee = donnees["tableau"][-1]["estimation_majorite_relative"]
+            self.assertEqual(derniere_donnee, [1, 4])  
 
 if __name__ == "__main__":
     unittest.main()
