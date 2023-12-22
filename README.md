@@ -39,8 +39,12 @@ Pour lancer l'application, exécutez ce fichier à l'aide de la commande suivant
 python interface_strict.py
 ```
 
+### Fonctionnement interface et règles du jeu
+
 Quelques informations sur l'interface et les règles de ce jeu : 
  L'interface s'ouvre sur le nombre de joueur de la partie, puis ensuite saisissez les pseudos et enfin choissisez le mode de jeu souhaitez.
+
+#### Les modes de jeu 
 
  5 mode de jeu sont disponibles : 
  - Strict : On recommence tant que tous les joueurs n'ont pas mis la même estimation.
@@ -48,6 +52,8 @@ Quelques informations sur l'interface et les règles de ce jeu :
  - Médiane : La médiane des estimations des joueurs correspond à l'estimation finale.
  - Majorité aboslue : La majorité absolue des estimations des joueurs correspond à l'estimation finale.
  - Majorité relative : La majorité relative des estimations des joueurs correspond à l'estimation finale.
+
+### Les règles 
 
  Pour que la partie se déroule correctement il faut suivres les instructions suivantes : 
  - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description.  
@@ -59,6 +65,7 @@ Si vous quittez la partie vous pouvez retrouvez votre backlog et les estimations
 /!\ Mais si vous relancez une partie le fichier JSON est réinitialisé. 
 
 ## Les tests unitaires
+
 Les tests unitaires du projet sont présents dans le fichier unittest.py. Vous pouvez les exécuter avec la commande suivante : 
 
 ```bash
