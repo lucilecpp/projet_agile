@@ -362,7 +362,7 @@ class Mode_Strict(Application):
         self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"interro", "cafe"]
+        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"Ne sais pas", "Pause"]
 
     def handle_close(self):
         # Gérer la fermeture de la fenêtre ici (sauvegarde, confirmation, etc.)
@@ -377,7 +377,7 @@ class Mode_Strict(Application):
         """
 
         # Traitement de la valeur pause
-        if valeur == "cafe":
+        if valeur == "Pause":
             self.pause()
         else :   
             # Stockage des informations dans la liste estimation
@@ -715,7 +715,7 @@ class Mode_Moyenne(Mode_Strict):
         self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"interro", "cafe"]
+        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"Ne sais pas", "Pause"]
 
     def vote_estimation_moyenne(self, valeur):
         """
@@ -726,16 +726,16 @@ class Mode_Moyenne(Mode_Strict):
         """
 
         # Gestion de la valeur pause
-        if valeur == "cafe":
+        if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
             # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
-            if valeur != "interro":
+            if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
 
             # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
-            if valeur == "interro":
+            if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
                 self.sauvegarder_estimation_moyenne()
@@ -888,7 +888,7 @@ class Mode_Mediane(Mode_Strict):
         self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"interro", "cafe"]        
+        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"Ne sais pas", "Pause"]        
         
     def vote_estimation_mediane(self, valeur):
         """
@@ -901,16 +901,16 @@ class Mode_Mediane(Mode_Strict):
         # Réinitialiser la liste avant chaque nouveau vote
         #self.estimation = []
        
-        if valeur == "cafe":
+        if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
             # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
-            if valeur != "interro":
+            if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
 
             # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
-            if valeur == "interro":
+            if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
                 self.sauvegarder_estimation_mediane()
@@ -1059,7 +1059,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
         self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        self.liste_valeur = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100 ,"interro", "cafe"]
+        self.liste_valeur = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100 ,"Ne sais pas", "Pause"]
 
     def vote_estimation_majorite_abs(self, valeur):
         """
@@ -1069,16 +1069,16 @@ class Mode_Majorite_Absolue(Mode_Strict):
         @param valeur : valeur votée par un joueur
         """
        
-        if valeur == "cafe":
+        if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
-            # Vérification que la valeur interro ne soit pas ajouter à la liste
-            if valeur != "interro":
+            # Vérification que la valeur Ne sais pas ne soit pas ajouter à la liste
+            if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
 
             # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
-            if valeur == "interro":
+            if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
                 self.sauvegarder_estimation_majorite_abs()
@@ -1233,7 +1233,7 @@ class Mode_Majorite_Relative(Mode_Strict):
         self.bouton_fin_de_partie.grid()
 
         # Définition de la liste contenant les valeurs des boutons
-        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"interro", "cafe"]
+        self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"Ne sais pas", "Pause"]
 
     def vote_estimation_majorite_rel(self, valeur):
         """
@@ -1243,16 +1243,16 @@ class Mode_Majorite_Relative(Mode_Strict):
         @param valeur : valeur votée par un joueur
         """
        
-        if valeur == "cafe":
+        if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
             # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
-            if valeur != "interro":
+            if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
 
             # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
-            if valeur == "interro":
+            if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
                 self.sauvegarder_estimation_majorite_rel()   
