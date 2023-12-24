@@ -10,24 +10,21 @@ import os
         with open("donnees.json", "w") as fichier_json:
             fichier_json.write("")'''
             
-from Interface1 import Mode_Strict
+from Interface1bis import Mode_Strict
 class TestModeStrict(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
         # Désactiver la destruction automatique de la fenêtre pendant les tests
         self.root.withdraw()
-        self.mode_strict = Mode_Strict(self.root, "John", 2, self.root)
+        self.mode_strict = Mode_Strict(self.root, ["John", "Alice"], 2, self.root)
 
     def tearDown(self):
         # Détruire la fenêtre seulement si elle existe encore
         if self.root.winfo_exists():
             self.root.destroy()
 
-    @patch("Interface1.messagebox.showinfo")
+    @patch("Interface1bis.messagebox.showinfo")     # Utilisation du décorateur patch
     def test_sauvegarder_donnees(self, mock_showinfo):
-        #effacer les informations déjà présentes dans le json
-        #self.mode_strict.effacer_donnee_json()
-
         # Simuler la saisie des données dans les zones de texte
         self.mode_strict.entree_num.insert(0, "1")
         self.mode_strict.entree_nom.insert(0, "Tache1")
@@ -38,12 +35,12 @@ class TestModeStrict(unittest.TestCase):
         self.mode_strict.sauvegarder_donnees()
 
         # Vérifier que les données sont correctement sauvegardées dans le fichier JSON
-        #with open("donnees.json", "r") as fichier_json:
-            #donnees = json.load(fichier_json)
-            #derniere_donnee = donnees["tableau"][-1]
-            #self.assertEqual(derniere_donnee["numero_tache"], "1")
-            #self.assertEqual(derniere_donnee["nom_tache"], "Tache1")
-            #self.assertEqual(derniere_donnee["description_tache"], "Description1")
+        with open("donnees.json", "r") as fichier_json:
+            donnees = json.load(fichier_json)
+            derniere_donnee = donnees["tableau"][-1]
+            self.assertEqual(derniere_donnee["numero_tache"], "1")
+            self.assertEqual(derniere_donnee["nom_tache"], "Tache1")
+            self.assertEqual(derniere_donnee["description_tache"], "Description1")
         
        # Vérifier que la boîte d'information est appelée
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
@@ -58,10 +55,11 @@ class TestModeStrict(unittest.TestCase):
         self.assertEqual(self.mode_strict.entree_description.get(), "")
         self.assertEqual(self.mode_strict.estimation, [])
 
-from Interface1 import Mode_Moyenne  
+from Interface1bis import Mode_Moyenne  
 class TestModeMoyenne(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+        # Désactiver la destruction automatique de la fenêtre pendant les tests
         self.root.withdraw()
         self.mode_moyenne = Mode_Moyenne(self.root, ["John", "Alice", "Margot"], 3, self.root)
         self.mode_moyenne.estimation = [5, 8, 13]
@@ -87,16 +85,19 @@ class TestModeMoyenne(unittest.TestCase):
         # Assurer que la moyenne est calculée correctement
         self.assertEqual(moyenne, 8.666666666666666)
 
-    @patch("Interface1.messagebox.showinfo")
+    @patch("Interface1bis.messagebox.showinfo")     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_moyenne(self, mock_showinfo):
+        # Appeler la méthode sauvegarder_estimation_moyenne
         self.mode_moyenne.sauvegarder_estimation_moyenne()
+        
         # Vérifier que la boîte d'information est appelée
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1 import Mode_Mediane
+from Interface1bis import Mode_Mediane
 class TestModeMediane(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+        # Désactiver la destruction automatique de la fenêtre pendant les tests
         self.root.withdraw()
         self.mode_mediane = Mode_Mediane(self.root, ["John", "Alice", "Margot"], 3, self.root)
         self.mode_mediane.estimation = [5, 8, 13]
@@ -115,7 +116,6 @@ class TestModeMediane(unittest.TestCase):
 
     def test_calcul_mediane(self):
         print("\nTest estimation mediane :")
-
         # Appeler la méthode de calcul de moyenne
         mediane = self.mode_mediane.calcul_mediane()
         
@@ -123,19 +123,22 @@ class TestModeMediane(unittest.TestCase):
         self.assertEqual(mediane, 8)
 
 
-    @patch('Interface1.messagebox.showinfo')
+    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_mediane(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_mediane
         self.mode_mediane.sauvegarder_estimation_mediane()
+        
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1 import Mode_Majorite_Absolue
+from Interface1bis import Mode_Majorite_Absolue
 class TestModeMajoriteAbsolue(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
+
+        # Désactiver la destruction automatique de la fenêtre pendant les tests
         self.root.withdraw()
-        self.mode_majorite_absolue = Mode_Majorite_Absolue(self.root, "John", 2, self.root)
+        self.mode_majorite_absolue = Mode_Majorite_Absolue(self.root, ["John", "Alice"], 2, self.root)
         self.mode_majorite_absolue.estimation = [5, 8]
 
     def tearDown(self):
@@ -153,26 +156,29 @@ class TestModeMajoriteAbsolue(unittest.TestCase):
 
     def test_calcul_majorite_abs(self):
         print("\nTest estimation majorite absolue :")
-
         # Appeler la méthode de calcul de moyenne
         majoriteAbs = self.mode_majorite_absolue.calcul_majorite_abs()
+       
         # Assurer que la moyenne est calculée correctement
         self.assertEqual(majoriteAbs, 5)
 
-    @patch('Interface1.messagebox.showinfo')
+    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_majorite_abs(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_majorite_abs
         self.mode_majorite_absolue.sauvegarder_estimation_majorite_abs()
+        
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1 import Mode_Majorite_Relative
+from Interface1bis import Mode_Majorite_Relative
 class TestModeMajoriteRelative(unittest.TestCase):  
     def setUp(self):
         self.root = Tk()
+        
         # Désactivez la destruction automatique de la fenêtre pendant les tests
         self.root.withdraw()
-        self.mode_majorite_relative = Mode_Majorite_Relative(self.root, ["John"], 1, self.root)
+        self.mode_majorite_relative = Mode_Majorite_Relative(self.root, ["John", "Alice", "Margot", "Maxime", "Lucas", "Laura", "Nathan", "Alexandra"], 8, self.root)
+        
         # Simuler des données dans la liste d'estimations
         self.mode_majorite_relative.estimation = [1, 2, 3, 1, 2, 3, 1, 1]
 
@@ -190,14 +196,16 @@ class TestModeMajoriteRelative(unittest.TestCase):
 
     def test_calcul_majorite_rel(self):
         print("\nTest estimation majorite relative :")
+
         # Testez la méthode calcul_majorite_rel avec une liste d'estimations
         result = self.mode_majorite_relative.calcul_majorite_rel()
         self.assertEqual(result, (1, 4))  
 
-    @patch('Interface1.messagebox.showinfo')  # Utilisez le décorateur patch pour mock la fonction showinfo
+    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_majorite_rel(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_majorite_rel
         self.mode_majorite_relative.sauvegarder_estimation_majorite_rel()
+
         # Vérifier que showinfo a été appelé
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
