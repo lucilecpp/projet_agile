@@ -4,13 +4,36 @@ from tkinter import Tk
 import json
 import os
 
-'''def effacer_donnees_json(self):
+
+from ApplicationPocker import Application  
+class TestApplication(unittest.TestCase):
+
+    def test_entrer_pseudos_valid(self):
+        root = Tk()
+        app = Application(root)
+
+        # Appel manuel de la méthode avec une valeur fixe
+        app.frame_nbJoueur.insert(0, "4")  # Simule la saisie utilisateur
+        app.entrer_pseudos()
+
+        self.assertEqual(app.nb_joueurs, 4)
+
+    def test_entrer_pseudos_invalid(self):
+        root = Tk()
+        app = Application(root)
+
+        with patch("builtins.input", side_effect=["invalid"]):
+            app.entrer_pseudos()
+
+
+'''    
+def effacer_donnees_json(self):
     # Effacer les données dans le fichier JSON s'il n'est pas vide
     if os.path.exists("donnees.json") and os.path.getsize("donnees.json") > 0:
         with open("donnees.json", "w") as fichier_json:
             fichier_json.write("")'''
             
-from Interface1bis import Mode_Strict
+from ApplicationPocker import Mode_Strict
 class TestModeStrict(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
@@ -23,7 +46,7 @@ class TestModeStrict(unittest.TestCase):
         if self.root.winfo_exists():
             self.root.destroy()
 
-    @patch("Interface1bis.messagebox.showinfo")     # Utilisation du décorateur patch
+    @patch("ApplicationPocker.messagebox.showinfo")     # Utilisation du décorateur patch
     def test_sauvegarder_donnees(self, mock_showinfo):
         # Simuler la saisie des données dans les zones de texte
         self.mode_strict.entree_num.insert(0, "1")
@@ -55,7 +78,7 @@ class TestModeStrict(unittest.TestCase):
         self.assertEqual(self.mode_strict.entree_description.get(), "")
         self.assertEqual(self.mode_strict.estimation, [])
 
-from Interface1bis import Mode_Moyenne  
+from ApplicationPocker import Mode_Moyenne  
 class TestModeMoyenne(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
@@ -74,7 +97,7 @@ class TestModeMoyenne(unittest.TestCase):
         self.mode_moyenne.vote_estimation_moyenne(8)
 
         # Vérifier que la valeur a été ajoutée à la liste d'estimation
-        self.assertEqual(self.mode_moyenne.estimation, [8])
+        self.assertEqual(self.mode_moyenne.estimation, [5, 8, 13, 8])
 
     def test_calcul_moyenne(self):
         print("\nTest estimation moyenne :")
@@ -85,7 +108,7 @@ class TestModeMoyenne(unittest.TestCase):
         # Assurer que la moyenne est calculée correctement
         self.assertEqual(moyenne, 8.666666666666666)
 
-    @patch("Interface1bis.messagebox.showinfo")     # Utilisation du décorateur patch
+    @patch("ApplicationPocker.messagebox.showinfo")     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_moyenne(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_moyenne
         self.mode_moyenne.sauvegarder_estimation_moyenne()
@@ -93,7 +116,7 @@ class TestModeMoyenne(unittest.TestCase):
         # Vérifier que la boîte d'information est appelée
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1bis import Mode_Mediane
+from ApplicationPocker import Mode_Mediane
 class TestModeMediane(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
@@ -112,7 +135,7 @@ class TestModeMediane(unittest.TestCase):
         self.mode_mediane.vote_estimation_mediane(8)
 
         # Vérifier que la valeur a été ajoutée à la liste d'estimation
-        self.assertEqual(self.mode_mediane.estimation, [8])
+        self.assertEqual(self.mode_mediane.estimation, [5, 8, 13, 8])
 
     def test_calcul_mediane(self):
         print("\nTest estimation mediane :")
@@ -123,7 +146,7 @@ class TestModeMediane(unittest.TestCase):
         self.assertEqual(mediane, 8)
 
 
-    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
+    @patch('ApplicationPocker.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_mediane(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_mediane
         self.mode_mediane.sauvegarder_estimation_mediane()
@@ -131,7 +154,7 @@ class TestModeMediane(unittest.TestCase):
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1bis import Mode_Majorite_Absolue
+from ApplicationPocker import Mode_Majorite_Absolue
 class TestModeMajoriteAbsolue(unittest.TestCase):
     def setUp(self):
         self.root = Tk()
@@ -162,7 +185,7 @@ class TestModeMajoriteAbsolue(unittest.TestCase):
         # Assurer que la moyenne est calculée correctement
         self.assertEqual(majoriteAbs, 5)
 
-    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
+    @patch('ApplicationPocker.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_majorite_abs(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_majorite_abs
         self.mode_majorite_absolue.sauvegarder_estimation_majorite_abs()
@@ -170,7 +193,7 @@ class TestModeMajoriteAbsolue(unittest.TestCase):
         # Vérifier que le message d'information est affiché
         mock_showinfo.assert_called_once_with("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-from Interface1bis import Mode_Majorite_Relative
+from ApplicationPocker import Mode_Majorite_Relative
 class TestModeMajoriteRelative(unittest.TestCase):  
     def setUp(self):
         self.root = Tk()
@@ -201,7 +224,7 @@ class TestModeMajoriteRelative(unittest.TestCase):
         result = self.mode_majorite_relative.calcul_majorite_rel()
         self.assertEqual(result, (1, 4))  
 
-    @patch('Interface1bis.messagebox.showinfo')     # Utilisation du décorateur patch
+    @patch('ApplicationPocker.messagebox.showinfo')     # Utilisation du décorateur patch
     def test_sauvegarder_estimation_majorite_rel(self, mock_showinfo):
         # Appeler la méthode sauvegarder_estimation_majorite_rel
         self.mode_majorite_relative.sauvegarder_estimation_majorite_rel()
@@ -212,7 +235,7 @@ class TestModeMajoriteRelative(unittest.TestCase):
         # Vérifier que les données sont correctement sauvegardées dans le fichier JSON
         with open("donnees.json", "r") as fichier_json:
             donnees = json.load(fichier_json)
-            derniere_donnee = donnees["tableau"][-1]["estimation_majorite_relative"]
+            derniere_donnee = donnees["tableau"][-1]["estimation_majorite_rel"]
             self.assertEqual(derniere_donnee, [1, 4])  
 
 if __name__ == "__main__":
