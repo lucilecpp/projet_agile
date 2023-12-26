@@ -7,7 +7,7 @@ from collections import Counter
 import statistics
 
 """
-@file 
+@file ApplicationPcker.py
 @brief Ce fichier est le fichier principal du projet
 @author Lucile Perbet
 @author Monica Mortelette
@@ -31,7 +31,7 @@ class Application:
      @class Application
      @brief Class principale du projet
 
-     Elle permet de récupérer les informations le nombre de joueur, les pseudos et le mode de jeu.
+     Elle permet de récupérer les informations le nombre de joueurs, les pseudos et le mode de jeu.
      """
 
      # Définition d'une variable de classe pour suivre les tours
@@ -41,7 +41,7 @@ class Application:
         """
         @brief constructeur de la classe Application
 
-        Ce constructeur définit l'interface de la classe Application avec les zones pour que l'utilisateur entre le nombre de joueur. 
+        Ce constructeur définit l'interface de la classe Application avec les zones pour que l'utilisateur entre le nombre de joueurs. 
         Mais également elle efface les données du json et dimmensionne la taille de la fenêtre principale 
 
         @param master : fenêtre princiaple de l'interface
@@ -63,13 +63,13 @@ class Application:
         # Appel de la fonction pour effacer les données du json à chaque appel de la classe Application
         self.effacer_donnee_json()
 
-        # Affichage pour entrer le nombre de joueur
+        # Affichage pour entrer le nombre de joueurs
         self.label_nbJoueur = Label(master, text = "Entrez le nombre de joueurs \n Veuillez entrer un entier : ")
         self.label_nbJoueur.pack()
         self.frame_nbJoueur = Entry(master, textvariable = int, width = 30)
         self.frame_nbJoueur.pack()
 
-        # Validation le choix du nombre de joueur
+        # Validation le choix du nombre de joueurs
         self.bouton_valider = Button(master, text = "Valider", command = lambda : self.entrer_pseudos())
         self.bouton_valider.pack()
 
@@ -77,11 +77,11 @@ class Application:
         """
         @brief Méthode pour la fenêtre pseudo
         Cette méthode gère l'entrée de chaque pseudo.
-        Elle récupère et stocke le nombre de joueur dans une variable et vérifie qu'il à entre 1 et 6 joueurs et que ce sont bien des chiffres qui sont saisis.
+        Elle récupère et stocke le nombre de joueurs dans une variable et vérifie qu'il à entre 1 et 6 joueurs et que ce sont bien des chiffres qui sont saisis.
         Elle affiche les différents mode de jeu et les entrées des pseudos.
         """
 
-        # Récupération du nombre de joueur saisi par l'utilisateur
+        # Récupération du nombre de joueurs saisi par l'utilisateur
         self.nb_joueurs = self.frame_nbJoueur.get()
 
         # Vérification que le nombre entrer est bien un chiffre
@@ -90,7 +90,7 @@ class Application:
             # Convertion en entier
             self.nb_joueurs = int(self.nb_joueurs)
 
-            # Vérification du nombre de joueur
+            # Vérification du nombre de joueurs
             if 1 <= self.nb_joueurs <= 6:
                 self.fenetre_pseudo = Toplevel(self.master)
 
@@ -139,7 +139,7 @@ class Application:
                 self.bouton_recommencer = Button(self.fenetre_pseudo, text = "Recommencer la partie", command = lambda:self.recommencer_partie())
                 self.bouton_recommencer.pack(anchor = "center")
 
-                # Masque la fenêtre du nombre de joueur
+                # Masque la fenêtre du nombre de joueurs
                 self.master.withdraw()
             else : messagebox.showerror("/!\ Erreur","Il faut entre 1 et 6 joueurs")
         else : 
@@ -274,7 +274,7 @@ class Mode_Strict(Application):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueur récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
 
@@ -282,7 +282,7 @@ class Mode_Strict(Application):
         taille_ecran(master)
         master.title("Mode Strict")        
 
-        # Stocker les pseudos et le nombre de joueur
+        # Stocker les pseudos et le nombre de joueurs
         self.pseudo = pseudo
         self.nb = int(nb)
 
@@ -625,7 +625,7 @@ class Mode_Moyenne(Mode_Strict):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueur récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
         
@@ -639,7 +639,7 @@ class Mode_Moyenne(Mode_Strict):
         # Pour stocker les pseudos
         self.pseudo = pseudo
 
-        # Stockage du nombre de joueur dans une variable
+        # Stockage du nombre de joueurs dans une variable
         self.nb = int(nb)
 
         # Variable pour connaître l'affichage de la partie
@@ -715,7 +715,7 @@ class Mode_Moyenne(Mode_Strict):
         """
         @brief Méthode pour stocker la valeur votée par les joueurs
         Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueur alors on sauvegrader l'estimation dans le json
+        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
         @param valeur : valeur votée par un joueur
         """
 
@@ -728,7 +728,7 @@ class Mode_Moyenne(Mode_Strict):
                 self.estimation.append(valeur)
                 print(self.estimation)
 
-            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
+            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueurs de 1
             if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
@@ -797,7 +797,7 @@ class Mode_Mediane(Mode_Strict):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueur récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
         
@@ -808,7 +808,7 @@ class Mode_Mediane(Mode_Strict):
         # Pour stocker les estimations
         self.estimation = []            
 
-        # Stockage du nombre de joueur dans une variable
+        # Stockage du nombre de joueurs dans une variable
         self.nb = int(nb)
 
         # Stockage des pseudos dans une variable
@@ -888,7 +888,7 @@ class Mode_Mediane(Mode_Strict):
         """
         @brief Méthode pour stocker la valeur votée par les joueurs
         Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueur alors on sauvegrader l'estimation dans le json
+        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
         @param valeur : valeur votée par un joueur
         """
 
@@ -903,7 +903,7 @@ class Mode_Mediane(Mode_Strict):
                 self.estimation.append(valeur)
                 print(self.estimation)
 
-            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
+            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueurs de 1
             if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
@@ -969,7 +969,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueur récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
         
@@ -980,7 +980,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
         # Pour stocker les estimations
         self.estimation = []
 
-        # Stockage du nombre de joueur dans une variable
+        # Stockage du nombre de joueurs dans une variable
         self.nb = int(nb)
 
         # Variable pour connaître l'affichage de la partie
@@ -1059,7 +1059,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
         """
         @brief Méthode pour stocker la valeur voter par les joueurs
         Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueur alors on sauvegrader l'estimation dans le json
+        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
         @param valeur : valeur votée par un joueur
         """
        
@@ -1071,7 +1071,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
                 self.estimation.append(valeur)
                 print(self.estimation)
 
-            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
+            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueurs de 1
             if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
@@ -1144,7 +1144,7 @@ class Mode_Majorite_Relative(Mode_Strict):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueur récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
         
@@ -1155,7 +1155,7 @@ class Mode_Majorite_Relative(Mode_Strict):
         # Pour stocker les estimations
         self.estimation = []
 
-        # Stockage du nombre de joueur et des pseudos dans une variable
+        # Stockage du nombre de joueurs et des pseudos dans une variable
         self.nb = int(nb)
         self.pseudo = pseudo
 
@@ -1233,7 +1233,7 @@ class Mode_Majorite_Relative(Mode_Strict):
         """
         @brief Méthode pour stocker la valeur voter par les joueurs
         Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueur alors on sauvegrader l'estimation dans le json
+        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
         @param valeur : valeur votée par un joueur
         """
        
@@ -1245,7 +1245,7 @@ class Mode_Majorite_Relative(Mode_Strict):
                 self.estimation.append(valeur)
                 print(self.estimation)
 
-            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueur de 1
+            # Si la valeur est Ne Sais Pas, on décrémente le nombre de joueurs de 1
             if valeur == "Ne sais pas":
                 self.nb -= 1
             if len(self.estimation) == self.nb:
