@@ -7,7 +7,7 @@ Ce projet a pour but de mettre en place une application de Planning Poker. C'est
 1. [Pré-requis](#pré-requis)
 2. [Utilisation](#utilisation)
 3. [Tests Unitaires](#tests-unitaires)
-4. [Fonctionnalités_Supplémentaires] (#fonctionnalites-supplementaires)
+4. [Fonctionnalités_Supplémentaires](#fonctionnalites-supplementaires)
 
 ## Pré-requis
 
