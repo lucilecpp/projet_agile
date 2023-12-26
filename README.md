@@ -7,10 +7,11 @@ Ce projet a pour but de mettre en place une application de Planning Poker. C'est
 1. [Pré-requis](#pré-requis)
 2. [Utilisation](#utilisation)
 3. [Tests Unitaires](#tests-unitaires)
+4. [Fonctionnalités Supplémentaires] (#fonctionnalites-supplementaires)
 
 ## Pré-requis
 
-Avant d'utiliser l'application, il est important d'avoir Python d'installé. Pour le télécharger c'est ici : [python.org](https://www.python.org/downloads/).
+Avant d'utiliser l'application, il est important d'avoir Python d'installé. Pour le télécharger, c'est ici : [python.org](https://www.python.org/downloads/).
 
 Pour que l'application fonctionne correctement, vous devez également installer les bibliothèques Python suivantes :
 - tkinter
@@ -19,8 +20,6 @@ Pour que l'application fonctionne correctement, vous devez également installer 
 - ctypes
 - collections
 - statistics
-- PIL
-- cairosvg
 - unittest
 
 ### Commandes d'installation
@@ -32,8 +31,6 @@ pip install ctypes
 pip install collections
 pip install statistics
 pip install os
-pip install Pillow 
-pip install cairosvg
 pip install unittest
 ```
 ## Utilisation
@@ -48,26 +45,26 @@ python ApplicationPocker.py
 ### Fonctionnement interface et règles du jeu
 
 Quelques informations sur l'interface et les règles de ce jeu : 
- L'interface s'ouvre sur le nombre de joueur de la partie, puis ensuite saisissez les pseudos et enfin choissisez le mode de jeu souhaitez.
+ L'interface s'ouvre sur le nombre de joueurs de la partie, puis ensuite saisissez les pseudos et enfin choisissez le mode de jeu souhaitez.
 
 #### Les modes de jeu 
 
- 5 mode de jeu sont disponibles : 
- - Strict : On recommence tant que tous les joueurs n'ont pas mis la même estimation.
- - Moyenne : La moyenne des estimations des joueurs correspond à l'estimation finale.
- - Médiane : La médiane des estimations des joueurs correspond à l'estimation finale.
- - Majorité aboslue : La majorité absolue des estimations des joueurs correspond à l'estimation finale.
- - Majorité relative : La majorité relative des estimations des joueurs correspond à l'estimation finale.
+ 5 modes de jeu sont disponibles : 
+ - Strict : on recommence tant que tous les joueurs n'ont pas mis la même estimation.
+ - Moyenne : la moyenne des estimations des joueurs correspond à l'estimation finale.
+ - Médiane : la médiane des estimations des joueurs correspond à l'estimation finale.
+ - Majorité aboslue : la majorité absolue des estimations des joueurs correspond à l'estimation finale.
+ - Majorité relative : la majorité relative des estimations des joueurs correspond à l'estimation finale.
 
 #### Les règles 
 
- Pour que la partie se déroule correctement il faut suivres les instructions suivantes : 
- - Pour chaque tâche de vôtre backlog entrez un numéro, un nom et une description.  
- - Chaque joueur donne son estimation via les boutons. Une fois vôtre tâche enregistrée passez à la suivante. 
+ Pour que la partie se déroule correctement, il faut suivre les instructions suivantes : 
+ - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description.  
+ - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passez à la suivante. 
  - Si le bouton recommencer est sélectionné, les informations du json seront perdues.
  - Pour quitter la partie, appuyez sur Fin de la Partie pour quitter l'interface.
 
-Si vous quittez la partie vous pouvez retrouvez votre backlog et les estimations associées dans le fichier JSON : donnees.json
+Si vous quittez la partie, vous pouvez retrouver votre backlog et les estimations associées dans le fichier JSON : donnees.json
 /!\ Mais si vous relancez une partie le fichier JSON est réinitialisé. 
 
 ## Les tests unitaires
@@ -80,37 +77,56 @@ python unittests.py
 
 Voici la liste des fonctions qui sont testées grâce aux tests unitaires : 
 - TestApplication :
-    - test_entrer_pseudos_valid : tester si lors de la saisie d'un entier, on peut continuer sur l'application
-    - test_entrer_pseudos_invalid : tester si lors de la saisie de caractères (hors entiers), l'application s'arrête
+    - test_entrer_pseudos_valid
+    - test_entrer_pseudos_invalid
     
 - TestModeStrict : 
-    - test_sauvegarder_donnees : tester si les données entrées sont bien enregistrées dans le JSON
-    - test_recommencer_partie_mode : tester si les données sont supprimées quand on clique sur le bouton "recommencer partie"
+    - test_sauvegarder_donnees
+    - test_recommencer_partie_mode
 
 - TestModeMoyenne :
-    - test_vote_estimation_moyenne : tester si l'estimation est récupérée
-    - test_calcul_moyenne : tester si la moyenne est calculée correctement
-    - test_sauvegarder_estimation_moyenne :  tester si la moyenne est bien enregistrée dans le JSON
+    - test_vote_estimation_moyenne
+    - test_calcul_moyenne
+    - test_sauvegarder_estimation_moyenne
 
 - TestModeMediane :
-    - test_vote_estimation_mediane : tester si l'estimation est récupérée
-    - test_calcul_mediane : tester si la médiane est calculée correctement
-    - test_sauvegarder_estimation_mediane : tester si la médiane est bien enregistrée dans le JSON
+    - test_vote_estimation_mediane 
+    - test_calcul_mediane
+    - test_sauvegarder_estimation_mediane
 
 - TestModeMajoriteAbsolue :
-    - test_vote_estimation_majorite_abs : tester si l'estimation est récupérée
-    - test_calcul_majorite_abs : tester si la majorité absolue est calculée correctement
-    - test_sauvegarder_estimation_majorite_abs : tester si la majorité absolue est bien enregistrée dans le JSON
+    - test_vote_estimation_majorite_abs
+    - test_calcul_majorite_abs 
+    - test_sauvegarder_estimation_majorite_abs
 
 - TestModeMajoriteRelative :
-    - test_vote_estimation_majorite_relative : tester si l'estimation est récupérée
-    - test_calcul_majorite_rel : tester si la majorité relative est calculée correctement
-    - test_sauvegarder_estimation_majorite_rel : tester si la majorité absolue est bien enregistrée dans le JSON
+    - test_vote_estimation_majorite_relative
+    - test_calcul_majorite_rel
+    - test_sauvegarder_estimation_majorite_rel
 
+## Fonctionnalités Supplémentaires
+Certaines fonctionnalités n'ont pas réussi à être implémentées dans le code, mais sur le dépôt il y a une trace des essai pour développer ces fonctionnalités.
+
+Les packages nécessaires pour que ce fichier fonctionne sont les suivants :
+
+### Installation
+```bash
+pip install Pillow 
+pip install cairosvg
+pip install tk
+pip intsall os
+```
+et pour lancer le fichier voici la commande suivante : 
+
+```bash
+python Fonctionnalites_supplementaires.py
+```
+
+### La liste des ajouts
+Dans ce fichier de code, nous retrouvons les fonctionnalités concernant l'affichage de carte cliquable, qui fonctionnerait comme des boutons et également un compte à rebours pour chronométrer les joueurs pendant leur partie. 
 
 
 A vous de jouez maintenant !
-
 
 
 
