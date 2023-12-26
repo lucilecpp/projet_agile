@@ -1,12 +1,10 @@
-from tkinter import Tk, StringVar, Button, Entry, messagebox, Label, scrolledtext, Toplevel, PhotoImage
+from tkinter import Tk, StringVar, Button, Entry, messagebox, Label, scrolledtext, Toplevel
 import tkinter as tk
 import os
 import json
 import ctypes
 from collections import Counter
 import statistics
-from PIL import Image, ImageTk
-import cairosvg
 
 """
 @file 
@@ -363,10 +361,6 @@ class Mode_Strict(Application):
 
         # Définition de la liste contenant les valeurs des boutons
         self.liste_valeur = [0,1,2,3,5,8,13,20,40,100,"Ne sais pas", "Pause"]
-
-    def handle_close(self):
-        # Gérer la fermeture de la fenêtre ici (sauvegarde, confirmation, etc.)
-        self.master.destroy() 
             
     def vote_estimation(self, valeur):
         """
@@ -486,7 +480,7 @@ class Mode_Strict(Application):
         # Charger les données existantes depuis le fichier JSON
         with open("donnees.json", "r") as fichier_json:
             donnees_existantes = json.load(fichier_json)
-        messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
+        messagebox.showinfo("Tâche enregistrée", "Vous pouvez maintenant passer au vote de l'estimation pour cette tâche")
 
         # Ajouter les nouvelles données au tableau existant
         nouvelle_donnee = {"numero_tache": num, "nom_tache": nom, "description_tache": description}
@@ -1002,7 +996,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
         # Ajout du texte par défaut
         self.zone_texte.insert(tk.END, "Cette zone est un bloc-note, Servez-vous en pour noter vos idées.")
 
-        # Création d'un Label pour expliquer les règles
+        # Création d'un label pour expliquer les règles
         regle="Bienvenue dans cette partie de planning poker. Pour que la partie se déroule correctement veuillez suivre les instructions suivantes : \n - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description. Cliquez sur sauvegarder ! \n - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passer à la suivante. \n - /!\ Si vous cliquez sur recommencer les tâches et estimations enregistrées seront perdues \n - Pour visualiser les tâches et estimations validées cliquez sur afficher les données \n - Toutes vos estimations sont faites ? Appuyez sur Fin de la Partie pour quitter l'interface. "
         self.zone_texte = Label(master, text = regle, font = ("Arial",10),anchor = tk.W, justify = tk.LEFT)
         self.zone_texte.grid(row = 0, column = 0)
