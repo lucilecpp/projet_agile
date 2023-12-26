@@ -67,7 +67,7 @@ Quelques informations sur l'interface et les règles de ce jeu :
 Si vous quittez la partie, vous pouvez retrouver votre backlog et les estimations associées dans le fichier JSON : donnees.json
 /!\ Mais si vous relancez une partie le fichier JSON est réinitialisé. 
 
-## Les tests unitaires
+## Tests Unitaires
 
 Les tests unitaires du projet sont présents dans le fichier unittests.py. Vous pouvez les exécuter avec la commande suivante : 
 
@@ -115,6 +115,7 @@ pip install Pillow
 pip install cairosvg
 pip install tk
 pip intsall os
+conda install -c conda-forge librsvg
 ```
 et pour lancer le fichier voici la commande suivante : 
 
