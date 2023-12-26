@@ -7,7 +7,7 @@ Ce projet a pour but de mettre en place une application de Planning Poker. C'est
 1. [Pré-requis](#pré-requis)
 2. [Utilisation](#utilisation)
 3. [Tests Unitaires](#tests-unitaires)
-4. [Fonctionnalités Supplémentaires] (#fonctionnalites-supplementaires)
+4. [Fonctionnalités_Supplémentaires] (#fonctionnalites-supplementaires)
 
 ## Pré-requis
 
@@ -104,7 +104,7 @@ Voici la liste des fonctions qui sont testées grâce aux tests unitaires :
     - test_calcul_majorite_rel
     - test_sauvegarder_estimation_majorite_rel
 
-## Fonctionnalités Supplémentaires
+## Fonctionnalités_Supplémentaires
 Certaines fonctionnalités n'ont pas réussi à être implémentées dans le code, mais sur le dépôt il y a une trace des essai pour développer ces fonctionnalités.
 
 Les packages nécessaires pour que ce fichier fonctionne sont les suivants :
