@@ -18,7 +18,7 @@ def taille_ecran(fenetre):
     """ 
     @brief Fonction permettant de définir la taille de la fenêtre en fonction de la résolution de l'écran
     @param fenetre : la fenêtre à redimentionner
-    @return : Les dimensions de la fenêtre
+    @return : les dimensions de la fenêtre
     """
 
     taille = ctypes.windll.user32
@@ -29,9 +29,9 @@ def taille_ecran(fenetre):
 class Application:
      """
      @class Application
-     @brief Class principale du projet
+     @brief Classe principale du projet
 
-     Elle permet de récupérer les informations le nombre de joueurs, les pseudos et le mode de jeu.
+     Elle permet de récupérer les informations sur nombre de joueurs, les pseudos et le mode de jeu.
      """
 
      # Définition d'une variable de classe pour suivre les tours
@@ -42,25 +42,25 @@ class Application:
         @brief constructeur de la classe Application
 
         Ce constructeur définit l'interface de la classe Application avec les zones pour que l'utilisateur entre le nombre de joueurs. 
-        Mais également elle efface les données du json et dimmensionne la taille de la fenêtre principale 
+        Mais également elle efface les données du json et dimmensionne la taille de la fenêtre principale. 
 
         @param master : fenêtre princiaple de l'interface
         """
 
-        # Stockage de master dans une varible
+        # Stockage de master dans une variable
         self.master = master
 
         # Définition d'un nom pour la fenêtre
         master.title("Application")
         
-        # Aggrandir la taille de la fenêtre
+        # Agrandir la taille de la fenêtre
         taille_ecran(master)
        
-       # A chaque nouvel appel la liste des pseudo est réinitialisé ainsi que le mode du jeu
+       # A chaque nouvel appel la liste des pseudos est réinitialisée ainsi que le mode de jeu
         self.list_pseudos = []
         self.mode = None
 
-        # Appel de la fonction pour effacer les données du json à chaque appel de la classe Application
+        # Appel de la fonction pour effacer les données du json
         self.effacer_donnee_json()
 
         # Affichage pour entrer le nombre de joueurs
@@ -69,7 +69,7 @@ class Application:
         self.frame_nbJoueur = Entry(master, textvariable = int, width = 30)
         self.frame_nbJoueur.pack()
 
-        # Validation le choix du nombre de joueurs
+        # Validation du choix pour le nombre de joueurs
         self.bouton_valider = Button(master, text = "Valider", command = lambda : self.entrer_pseudos())
         self.bouton_valider.pack()
 
@@ -77,7 +77,7 @@ class Application:
         """
         @brief Méthode pour la fenêtre pseudo
         Cette méthode gère l'entrée de chaque pseudo.
-        Elle récupère et stocke le nombre de joueurs dans une variable et vérifie qu'il à entre 1 et 6 joueurs et que ce sont bien des chiffres qui sont saisis.
+        Elle récupère et stocke le nombre de joueurs dans une variable et vérifie qu'il est entre 1 et 6 et que ce sont bien des chiffres qui sont saisis.
         Elle affiche les différents mode de jeu et les entrées des pseudos.
         """
 
@@ -94,7 +94,7 @@ class Application:
             if 1 <= self.nb_joueurs <= 6:
                 self.fenetre_pseudo = Toplevel(self.master)
 
-                # Aggrandir la fenêtre
+                # Agrandir la fenêtre
                 taille_ecran(self.fenetre_pseudo)
                 self.fenetre_pseudo.title("Pseudo")
 
@@ -115,13 +115,13 @@ class Application:
                 self.bouton_valider_pseudo.pack()
                  
                 # Définition des boutons pour les différents modes de jeu
-                self.label_instruction = Label(self.fenetre_pseudo, text = "\n Choissisez le mode de jeu :")
+                self.label_instruction = Label(self.fenetre_pseudo, text = "\n Choisissez le mode de jeu :")
                 self.label_instruction.pack_forget()
 
                 self.bouton_valider_Strict = Button(self.fenetre_pseudo, text = "Mode Strict", command = self.recupere_mode_strict)
                 self.bouton_valider_Strict.pack_forget()
 
-                self.bouton_valider_Mediane = Button(self.fenetre_pseudo, text = "Mode Mediane", command = self.recupere_mode_mediane)
+                self.bouton_valider_Mediane = Button(self.fenetre_pseudo, text = "Mode Médiane", command = self.recupere_mode_mediane)
                 self.bouton_valider_Mediane.pack_forget()
 
                 self.bouton_valider_Moyenne = Button(self.fenetre_pseudo, text = "Mode Moyenne", command = self.recupere_mode_moyenne)
@@ -141,6 +141,7 @@ class Application:
 
                 # Masque la fenêtre du nombre de joueurs
                 self.master.withdraw()
+
             else : messagebox.showerror("/!\ Erreur","Il faut entre 1 et 6 joueurs")
         else : 
             messagebox.showerror("/!\ Erreur","Veuillez saisir un nombre entier")
@@ -210,7 +211,7 @@ class Application:
         """
         @brief Méthode qui récupère les pseudos
         Les pseudos sont stockées dans une liste.
-        Cette méthode gère l'appairiton des boutons du mode de je
+        Cette méthode gère l'apparition des boutons du mode de jeu
         """
 
         # Récupérer les pseudos à partir de la liste des StringVar
@@ -226,7 +227,7 @@ class Application:
         # Passage du bouton en vert pour montrer qu'il a été validé
         self.bouton_valider_pseudo.configure(bg = "#82977e", fg = "white")
 
-        # Apparition des boutons pour le choix du mode
+        # Apparition des boutons pour le choix du mode de jeu
         self.label_instruction.pack()
         self.bouton_valider_Strict.pack()
         self.bouton_valider_Mediane.pack()
@@ -237,7 +238,7 @@ class Application:
      def recommencer_partie(self):
         """
         @brief Méthode pour recommencer une partie
-        Pour recommencer une partie une nouvelle fenêtre un nouvel objet de la classe Application est instancié.
+        Pour recommencer une partie, un nouvel objet de la classe Application est instancié.
         """
 
         # Destruction de la fenêtre actuelle
@@ -262,10 +263,9 @@ class Application:
 
 class Mode_Strict(Application):
     """
-    @ class Mode_Strict
+    @class Mode_Strict
     @brief Classe qui définit les conditions du mode de jeu strict
     Cette classe hérite de la classe Application
-
     """
     def __init__(self, master, pseudo, nb, fenetre) :
         """
@@ -274,7 +274,7 @@ class Mode_Strict(Application):
 
         @param master (tk.Tk) : fenêtre principale pour le mode strict
         @param pseudo (list) : liste des pseudos provenant de la classe Application
-        @param nb (int) : nombre de joueurs récupérer grâce à la classe mère
+        @param nb (int) : nombre de joueurs récupérés grâce à la classe mère
         @param fenetre (Tk) : la fenêtre définit pour la classe Application
         """
 
@@ -302,7 +302,7 @@ class Mode_Strict(Application):
         # Ajout du texte par défaut
         self.zone_texte.insert(tk.END, "Cette zone est un bloc-note, Servez-vous en pour noter vos idées.")
 
-        # Création d'un Label pour expliquer les règles
+        # Création d'un label pour expliquer les règles
         regle = "Bienvenue dans cette partie de planning poker. Pour que la partie se déroule correctement veuillez suivre les instructions suivantes : \n - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description. Cliquez sur sauvegarder ! \n - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passer à la suivante. \n - /!\ Si vous cliquez sur recommencer les tâches et estimations enregistrées seront perdues \n - Pour visualiser les tâches et estimations validées cliquez sur afficher les données \n - Toutes vos estimations sont faites ? Appuyez sur Fin de la Partie pour quitter l'interface. "
         self.zone_texte = Label(master, text = regle, font = ("Arial",10),anchor = tk.W, justify = tk.LEFT)
         self.zone_texte.grid(row = 0, column = 0)
@@ -340,19 +340,19 @@ class Mode_Strict(Application):
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
                 
-        #label et zone de texte du numero de la tache
+        # label et zone de texte du numero de la tache
         self.label_num.grid()
         self.entree_num.grid()
 
-        #label et zone de texte du nom de la tache
+        # label et zone de texte du nom de la tache
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        #label et zone de texte de la description de la tache
+        # label et zone de texte de la description de la tâche
         self.label_description.grid()
         self.entree_description.grid()
 
-        #Boutons
+        # Boutons
         self.bouton_sauvegarder.grid()
         self.bouton_tache.grid_forget()
         self.bouton_recommencer.grid()
@@ -365,16 +365,17 @@ class Mode_Strict(Application):
     def vote_estimation(self, valeur):
         """
         @brief Méthode pour récupérer le vote de chaque joueur
-        Execpté pour la valeur pause, chaque valeur de vote est stocké dans une liste.
-        Une fois que le nombre d'élément de la liste est équivalente aux nombres de joueurs. La fonction sauvegarder_estimation est appelée
+        Sauf pour la valeur "pause", chaque valeur de vote est stockée dans une liste.
+        Une fois que le nombre d'éléments de la liste est équivalent au nombre de joueurs, la fonction sauvegarder_estimation est appelée.
         @param valeur : la valeur de l'estimation du joueur
         """
+
 
         # Traitement de la valeur pause
         if valeur == "Pause":
             self.pause()
         else :   
-            # Stockage des informations dans la liste estimation
+            # Stockage des informations dans la liste des estimations
             self.estimation.append(valeur)
             if len(self.estimation) == self.nb:
                 self.sauvegarder_estimation()
@@ -383,10 +384,11 @@ class Mode_Strict(Application):
                 
     def verif_regle(self):
         """
-        @brief Méthode pour vérfier que la règle du mode strict est bien respectée
-        Si la règle est respectée la valeur est enregistrée dans le json sinon les joueurs doivent voter denouveau
-        @return : Un booléan indiquant si la règle est respectée
+        @brief Méthode pour vérifier que la règle du mode strict est bien respectée
+        Si la règle est respectée, la valeur est enregistrée dans le JSON, sinon les joueurs doivent voter à nouveau.
+        @return : Un booléen indiquant si la règle est respectée
         """
+
 
         # Initiation d'une variable pour connaître le statut de la fonction
         indice = False
@@ -394,7 +396,7 @@ class Mode_Strict(Application):
         # Suppression des doublons
         self.estimation_final = set(self.estimation)
 
-        # Vérification de la longueur de la liste soit égale à 1
+        # Vérification que la longueur de la liste soit égale à 1
         if len(self.estimation_final) == 1:
             print(self.estimation_final, len(self.estimation_final))
             indice = True
@@ -406,8 +408,8 @@ class Mode_Strict(Application):
 
     def sauvegarder_estimation(self):
         """
-        @brief Méthode pour enregistrer l'estimation dans le fichier JSON
-        Lorsque l'enregistrement est terminé, le bouton tâche suivante s'active
+        @brief Méthode pour enregistrer l'estimation dans le fichier JSON.
+        Lorsque l'enregistrement est terminé, le bouton tâche suivante s'active.
         """  
 
         if self.verif_regle() == True:
@@ -423,15 +425,15 @@ class Mode_Strict(Application):
                     json.dump(donnees_existantes, fichier_json, indent = 4)
                 messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
                 
-                # Activer le clignotement du bouton tache suivante
+                # Activer le clignotement du bouton tâche suivante
                 self.clignoter(True)
     
     def clignoter(self, statut):
         """
-        @brief Méthode pour définir le clignotement du bouton tache suivante
-        @param statut : booléan qui inique si le clignotement soit s'arrêter ou commencer
-
+        @brief Méthode pour définir le clignotement du bouton "tâche suivante".
+        @param statut : booléen qui indique si le clignotement doit s'arrêter ou commencer.
         """
+
 
         # Affectation de statut dans une variable
         etat_clignotement = statut
@@ -455,8 +457,8 @@ class Mode_Strict(Application):
           
     def creer_fichier_json(self):
             """
-            @brief Méthode pour créer le fichier json
-            Si le fichier JSON n'existe pas il est crée avec un tableau vide dedans
+            @brief Méthode pour créer le fichier json.
+            Si le fichier JSON n'existe pas, il est crée avec un tableau vide dedans.
             """
             
             chemin_fichier = "donnees.json"
@@ -468,10 +470,11 @@ class Mode_Strict(Application):
         """
         @brief Méthode pour sauvegarder les informations du backlog saisies par l'utilisateur.
         L'utilisateur entre un numéro, un nom et une description pour chaque tâche de son backlog.
-        Ensuite les informations sont enregistrées dans le tableau du JSON
+        Ensuite, les informations sont enregistrées dans le tableau du JSON.
         """
 
         print("Sauvegarde dans le Json")
+
         # Récupérer les données depuis les zones de texte
         num  =  self.entree_num.get()
         nom = self.entree_nom.get()
@@ -496,19 +499,21 @@ class Mode_Strict(Application):
         # Définition des boutons de vote
         self.appel_bouton()
 
-        # Apparition de bouton tâche suivante
+        # Apparition du bouton tâche suivante
         self.bouton_tache.grid()
     
     def appel_bouton(self):
         """
         @brief Méthode pour créer les boutons de vote
-        Une fois créer les boutons sont stockées dans une liste
+        Une fois créés, les boutons sont stockés dans une liste
         """
+
 
         # Définition des boutons de vote
         self.boutons_vote = []
         for j, k in enumerate(self.pseudo):
             for i, value in enumerate(self.liste_valeur):
+
                 # Affichage des pseudos
                 label_pseudo = Label(self.master, text = f"A \n {k} \n de voter")
                 label_pseudo.grid(row = 0, column = 10 + j + 10)
@@ -522,8 +527,9 @@ class Mode_Strict(Application):
 
         """
         @brief Méthode pour recommencer une partie
-        La fonctione recommencer partie de la classe mère est appelée mais en plus la fonction tache suivante de cette classe est appelée
+        La fonction 'recommencer_partie' de la classe mère est appelée, et en plus, la fonction 'tache_suivante' de cette classe est appelée
         """
+
 
         # Initialisation d'une variable pour connaître le statut de la partie
         self.indice_rec = 1
@@ -531,7 +537,7 @@ class Mode_Strict(Application):
         # Appel de la fonction tache_suivante pour réinitisaliser les paramètres de l'interface
         self.tache_suivante()
         
-        # Utilsiation de la fonction recommencer_partie de la classe mère
+        # Utilisation de la fonction recommencer_partie de la classe mère
         if self.master.winfo_exists():
             self.master.iconify()  # Cacher la fenêtreApplication.recommencer_partie(self)
             self.master.update_idletasks()  # Mettre à jour les tâches en attente pour s'assurer que la fenêtre est cachée
@@ -552,8 +558,8 @@ class Mode_Strict(Application):
     def tache_suivante(self):
         """
         @brief Méthode pour la gestion du bouton de la tâche suivante
-        Les zones de saisies pour entrer le numéro, nom et description du backlog sont réinitialisées
-        La fonction clignoter est désactiver et le bouton tâche suivante disparaît
+        Les zones de saisie pour entrer le numéro, le nom et la description du backlog sont réinitialisées.
+        La fonction clignoter est désactivée et le bouton "tâche suivante" disparaît.
         """
 
         self.entree_num.delete(0, tk.END)
@@ -561,18 +567,19 @@ class Mode_Strict(Application):
         self.entree_description.delete(0, tk.END)
         self.estimation = []
 
-        if self.indice_rec != 1:        
+        if self.indice_rec != 1:    
+
             # Disparition du bouton tâche suivante
             self.bouton_tache.grid_forget()
 
             # Passage du bouton sauvegarder en couleur classique
             self.bouton_sauvegarder.configure(bg = "#ececec", fg = "black")
 
-            # Dispairiton des boutons de vote
+            # Disparition des boutons de vote
             for i in self.boutons_vote:
                 i.grid_forget()
         
-            # Désactiver le clignotement du bouton tache suivante
+            # Désactivation du clignotement du bouton tache suivante
             self.clignoter(False)
         else: 
              pass
@@ -583,10 +590,11 @@ class Mode_Strict(Application):
     
     def afficher_donnees_json(self):
         """
-        @brief Méthode pour visaliser les données du JSON
-        Elle montre le numéro, le nom, la description et l'estimation pour chaque tâche en créant une zone de texte
-        A chaque clique sur le bouton les informations de la zone de texte sont effacées
+        @brief Méthode pour visualiser les données du JSON
+        Elle montre le numéro, le nom, la description et l'estimation pour chaque tâche en créant une zone de texte.
+        À chaque clic sur le bouton, les informations de la zone de texte sont effacées.
         """
+
 
         # Charger les données depuis le fichier JSON
         with open("donnees.json", "r") as fichier_json:
@@ -652,7 +660,7 @@ class Mode_Moyenne(Mode_Strict):
         # Ajout du texte par défaut
         self.zone_texte.insert(tk.END, "Cette zone est un bloc-note, Servez-vous en pour noter vos idées.")
 
-        # Création d'un Label pour expliquer les règles
+        # Création d'un label pour expliquer les règles
         regle = "Bienvenue dans cette partie de planning poker. Pour que la partie se déroule correctement veuillez suivre les instructions suivantes : \n - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description. Cliquez sur sauvegarder ! \n - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passer à la suivante. \n - /!\ Si vous cliquez sur recommencer les tâches et estimations enregistrées seront perdues \n - Pour visualiser les tâches et estimations validées cliquez sur afficher les données \n - Toutes vos estimations sont faites ? Appuyez sur Fin de la Partie pour quitter l'interface. "
         self.zone_texte = Label(master, text = regle, font = ("Arial",10),anchor = tk.W, justify = tk.LEFT)
         self.zone_texte.grid(row = 0, column = 0)
@@ -690,15 +698,15 @@ class Mode_Moyenne(Mode_Strict):
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
         
-        #label et zone de texte du numero de la tache
+        # label et zone de texte du numero de la tache
         self.label_num.grid()
         self.entree_num.grid()
 
-        #label et zone de texte du nom de la tache
+        # label et zone de texte du nom de la tache
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        #label et zone de texte de la description de la tache
+        # label et zone de texte de la description de la tache
         self.label_description.grid
         self.entree_description.grid
 
@@ -714,16 +722,17 @@ class Mode_Moyenne(Mode_Strict):
     def vote_estimation_moyenne(self, valeur):
         """
         @brief Méthode pour stocker la valeur votée par les joueurs
-        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
+        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas.
+        Si le nombre d'éléments de la liste est égal au nombre de joueurs, alors on sauvegarde l'estimation dans le JSON.
         @param valeur : valeur votée par un joueur
         """
+
 
         # Gestion de la valeur pause
         if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
-            # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
+            # Vérification que la valeur Ne Sais Pas ne soit pas ajoutée à la liste
             if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
@@ -747,7 +756,7 @@ class Mode_Moyenne(Mode_Strict):
 
     def sauvegarder_estimation_moyenne(self):  
             """
-            @brief Sauvegarder de la moyenne dans le fichier JSON
+            @brief Sauvegarder la moyenne dans le fichier JSON
             Activation de la fonction clignoter pour le bouton tache suivant
             """  
 
@@ -775,6 +784,7 @@ class Mode_Moyenne(Mode_Strict):
         self.boutons_vote = []
         for j, k in enumerate(self.pseudo):
             for i, value in enumerate(self.liste_valeur):
+
                 # Affichage des pseudos
                 label_pseudo = Label(self.master, text = f"A \n {k} \n de voter")
                 label_pseudo.grid(row = 0, column = 10 + j + 10)
@@ -824,7 +834,7 @@ class Mode_Mediane(Mode_Strict):
         # Ajout du texte par défaut
         self.zone_texte.insert(tk.END, "Cette zone est un bloc-note, Servez-vous en pour noter vos idées.")
 
-        # Création d'un Label pour expliquer les règles
+        # Création d'un label pour expliquer les règles
         regle = "Bienvenue dans cette partie de planning poker. Pour que la partie se déroule correctement veuillez suivre les instructions suivantes : \n - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description. Cliquez sur sauvegarder ! \n - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passer à la suivante. \n - /!\ Si vous cliquez sur recommencer les tâches et estimations enregistrées seront perdues \n - Pour visualiser les tâches et estimations validées cliquez sur afficher les données \n - Toutes vos estimations sont faites ? Appuyez sur Fin de la Partie pour quitter l'interface. "
         self.zone_texte = Label(master, text = regle, font = ("Arial",10), anchor = tk.W, justify = tk.LEFT)
         self.zone_texte.grid(row = 0, column = 0)
@@ -862,16 +872,16 @@ class Mode_Mediane(Mode_Strict):
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
 
-        #label et zone de texte du numero de la tache
+        # label et zone de texte du numero de la tache
         self.label_num.grid()
         self.entree_num.grid()
 
-        #label et zone de texte du nom de la tache
+        # label et zone de texte du nom de la tache
 
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        #label et zone de texte de la description de la tache
+        # label et zone de texte de la description de la tache
         self.label_description.grid
         self.entree_description.grid
 
@@ -887,18 +897,17 @@ class Mode_Mediane(Mode_Strict):
     def vote_estimation_mediane(self, valeur):
         """
         @brief Méthode pour stocker la valeur votée par les joueurs
-        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
+        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas.
+        Si le nombre d'éléments de la liste est égal au nombre de joueurs, alors on sauvegarde l'estimation dans le JSON.
         @param valeur : valeur votée par un joueur
         """
-
         # Réinitialiser la liste avant chaque nouveau vote
         #self.estimation = []
        
         if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
-            # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
+            # Vérification que la valeur Ne Sais Pas ne soit pas ajoutée à la liste
             if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
@@ -922,7 +931,7 @@ class Mode_Mediane(Mode_Strict):
 
     def sauvegarder_estimation_mediane(self): 
             """
-            @brief Sauvegarder de la médiane dans le fichier JSON
+            @brief Sauvegarder la médiane dans le fichier JSON
             Activation de la fonction clignoter pour le bouton tache suivant
             """   
 
@@ -950,8 +959,11 @@ class Mode_Mediane(Mode_Strict):
             self.boutons_vote = []
             for j, k in enumerate(self.pseudo):
                 for i, value in enumerate(self.liste_valeur):
+                    # Affichage des pseudos
                     label_pseudo = Label(self.master, text = f"A \n {k} \n de voter")
                     label_pseudo.grid(row = 0, column = 10 + j + 10)
+
+                    # Affichage des boutons
                     button_vote = Button(self.master, text = value, command = lambda v = value: self.vote_estimation_mediane(v))
                     button_vote.grid(row = i + 1, column = 10 + j + 10)
                     self.boutons_vote.append(button_vote)
@@ -959,7 +971,7 @@ class Mode_Mediane(Mode_Strict):
 class Mode_Majorite_Absolue(Mode_Strict):
     """
     @class Mode_Majorite_Absolue
-    @brief Cette classe définit les règles et l'interface du mode majorite absolue
+    @brief Cette classe définit les règles et l'interface du mode majorité absolue
     Elle hérite de Mode_Strict 
     """
     def __init__(self, master, pseudo, nb, fenetre) :
@@ -1034,15 +1046,15 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
         
-        #label et zone de texte du numero de la tache
+        # label et zone de texte du numero de la tache
         self.label_num.grid()
         self.entree_num.grid()
 
-        #label et zone de texte du nom de la tache
+        # label et zone de texte du nom de la tache
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        #label et zone de texte de la description de la tache
+        # label et zone de texte de la description de la tache
         self.label_description.grid
         self.entree_description.grid
 
@@ -1057,16 +1069,17 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
     def vote_estimation_majorite_abs(self, valeur):
         """
-        @brief Méthode pour stocker la valeur voter par les joueurs
-        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
+        @brief Méthode pour stocker la valeur votée par les joueurs
+        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas.
+        Si le nombre d'éléments de la liste est égal au nombre de joueurs, alors on sauvegarde l'estimation dans le JSON.
         @param valeur : valeur votée par un joueur
         """
+
        
         if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
-            # Vérification que la valeur Ne sais pas ne soit pas ajouter à la liste
+            # Vérification que la valeur Ne sais pas ne soit pas ajoutée à la liste
             if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
@@ -1079,8 +1092,8 @@ class Mode_Majorite_Absolue(Mode_Strict):
 
     def calcul_majorite_abs(self):
         """
-        @brief Méthode pour calculer la majorite absolue des estimations
-        @return : la majorite absolue des estimations
+        @brief Méthode pour calculer la majorité absolue des estimations
+        @return : la majorité absolue des estimations
         """
 
         if len(self.estimation) == self.nb:
@@ -1109,7 +1122,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
                 json.dump(donnees_existantes, fichier_json, indent=4)
             messagebox.showinfo("Mission réussie", "L'estimation est bien enregistrée \n Veuillez cliquer sur tâche suivante \n pour passer à la suite")
 
-            # Activation fonction clignotement
+            # Activation fonction clignoter
             self.clignoter(True)
 
     def appel_bouton(self):
@@ -1122,6 +1135,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
         self.boutons_vote = []
         for j, k in enumerate(self.pseudo):
             for i, value in enumerate(self.liste_valeur):
+
                 # Affichage des pseudos
                 label_pseudo = Label(self.master, text = f"A \n {k} \n de voter")
                 label_pseudo.grid(row = 0, column = 10 + j + 10)
@@ -1134,7 +1148,7 @@ class Mode_Majorite_Absolue(Mode_Strict):
 class Mode_Majorite_Relative(Mode_Strict):
     """
     @class Mode_Majorite_Relative
-    @brief Cette classe définit les règles et l'interface du mode majorite relative
+    @brief Cette classe définit les règles et l'interface du mode majorité relative
     Elle hérite de Mode_Strict
     """
     def __init__(self, master, pseudo, nb, fenetre):
@@ -1169,7 +1183,7 @@ class Mode_Majorite_Relative(Mode_Strict):
         # Ajout du texte par défaut
         self.zone_texte.insert(tk.END, "Cette zone est un bloc-note, Servez-vous en pour noter vos idées.")
 
-        # Création d'un Label pour expliquer les règles
+        # Création d'un label pour expliquer les règles
         regle = "Bienvenue dans cette partie de planning poker. Pour que la partie se déroule correctement veuillez suivre les instructions suivantes : \n - Pour chaque tâche de votre backlog entrez un numéro, un nom et une description. Cliquez sur sauvegarder ! \n - Chaque joueur donne son estimation via les boutons. Une fois votre tâche enregistrée passer à la suivante. \n - /!\ Si vous cliquez sur recommencer les tâches et estimations enregistrées seront perdues \n - Pour visualiser les tâches et estimations validées cliquez sur afficher les données \n - Toutes vos estimations sont faites ? Appuyez sur Fin de la Partie pour quitter l'interface. "
         self.zone_texte = Label(master, text = regle, font = ("Arial",10), anchor = tk.W, justify = tk.LEFT)
         self.zone_texte.grid(row = 0, column = 0)
@@ -1207,15 +1221,15 @@ class Mode_Majorite_Relative(Mode_Strict):
 
         # Placement des étiquettes, zones de texte et bouton dans la fenêtre
         
-        #label et zone de texte du numéro de la tache
+        # label et zone de texte du numéro de la tache
         self.label_num.grid()
         self.entree_num.grid()
 
-        #label et zone de texte du nom de la tache
+        # label et zone de texte du nom de la tache
         self.label_nom.grid()
         self.entree_nom.grid()
 
-        #label et zone de texte description de la tache
+        # label et zone de texte description de la tache
         self.label_description.grid
         self.entree_description.grid
 
@@ -1231,16 +1245,17 @@ class Mode_Majorite_Relative(Mode_Strict):
 
     def vote_estimation_majorite_rel(self, valeur):
         """
-        @brief Méthode pour stocker la valeur voter par les joueurs
-        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas
-        Si le nombre d'élément de la liste est égale au nombre de joueurs alors on sauvegrader l'estimation dans le json
+        @brief Méthode pour stocker la valeur votée par les joueurs
+        Chaque valeur est ajoutée à la liste des estimations si elle n'est pas égale à Pause ou Ne Sais Pas.
+        Si le nombre d'éléments de la liste est égal au nombre de joueurs, alors on sauvegarde l'estimation dans le JSON.
         @param valeur : valeur votée par un joueur
         """
+
        
         if valeur == "Pause":
             Mode_Strict.pause(self)
         else : 
-            # Vérification que la valeur Ne Sais Pas ne soit pas ajouter à la liste
+            # Vérification que la valeur Ne Sais Pas ne soit pas ajoutée à la liste
             if valeur != "Ne sais pas":
                 self.estimation.append(valeur)
                 print(self.estimation)
