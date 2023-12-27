@@ -1,0 +1,13 @@
+digraph "Interface_strict.Mode_Moyenne.calcul_moyenne"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node13 [label="Interface_strict.Mode\l_Moyenne.calcul_moyenne",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Interface_strict.Mode\l_Moyenne.sauvegarder\l_estimation_moyenne",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___moyenne.html#a640bc5b1860f334fab93f7b01420b8bd"];
+  Node14 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="Interface_strict.Mode\l_Moyenne.vote_estimation\l_moyenne",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___moyenne.html#a76995324be0e80f7ba2ed238acc9a2a1"];
+  Node15 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="Interface_strict.Mode\l_Moyenne.appel_bouton",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___moyenne.html#ae63e7afd0a1201e942c5bc2a8fb0828e"];
+}

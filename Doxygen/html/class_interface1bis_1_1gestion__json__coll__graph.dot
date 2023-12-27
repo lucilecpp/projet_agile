@@ -1,0 +1,6 @@
+digraph "Interface1bis.gestion_json"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Interface1bis.gestion_json\n|+ label_num\l+ entree_num\l+ label_nom\l+ entree_nom\l+ label_description\l+ entree_description\l|+ __init__()\l+ creer_fichier_json()\l+ sauvegarder_donnees()\l+ recommencer_partie()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

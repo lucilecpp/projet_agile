@@ -1,0 +1,24 @@
+digraph "Interface_strict.Mode_Majorite_Relative.vote_estimation_majorite_rel"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node25 [label="Interface_strict.Mode\l_Majorite_Relative.vote\l_estimation_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node25 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="ApplicationPocker.Mode\l_Majorite_Relative.sauvegarder\l_estimation_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___majorite___relative.html#ace3834e159befb96257af4ec2eb9f4e2"];
+  Node26 -> Node27 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node27 [label="ApplicationPocker.Mode\l_Majorite_Relative.calcul\l_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___majorite___relative.html#af9bb1561520e05a2a3732f367caaf5d6"];
+  Node26 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="ApplicationPocker.Mode\l_Strict.clignoter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___strict.html#a843a41abde8f3149546359546840d74a"];
+  Node28 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 -> Node29 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="Interface_strict.Mode\l_Majorite_Relative.sauvegarder\l_estimation_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___majorite___relative.html#a23b6f69be4d7daec1abf40b89c993bad"];
+  Node29 -> Node27 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 -> Node30 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="Interface_strict.Mode\l_Majorite_Relative.calcul\l_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___majorite___relative.html#a10acd9f7fd88ce3d525f48d4feaa0a8b"];
+  Node29 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 -> Node31 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node31 [label="Interface_strict.Mode\l_Strict.clignoter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html#a4e861610380efa3bf23ac3e7c2ecdac7"];
+  Node31 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node31 -> Node31 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

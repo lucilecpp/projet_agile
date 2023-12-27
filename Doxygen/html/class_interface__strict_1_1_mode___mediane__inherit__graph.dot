@@ -1,0 +1,10 @@
+digraph "Interface_strict.Mode_Mediane"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node0 [label="{Interface_strict.Mode\l_Mediane\n|+ master\l+ estimation\l+ nb\l+ pseudo\l+ indice_rec\l+ zone_texte\l+ label_num\l+ entree_num\l+ label_nom\l+ entree_nom\land 9 more...\l|+ __init__()\l+ vote_estimation_mediane()\l+ calcul_mediane()\l+ sauvegarder_estimation\l_mediane()\l+ appel_bouton()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node1 [label="{Interface_strict.Mode\l_Strict\n|+ master\l+ pseudo\l+ nb\l+ estimation\l+ indice_rec\l+ zone_texte\l+ label_num\l+ entree_num\l+ label_nom\l+ entree_nom\land 12 more...\l|+ __init__()\l+ vote_estimation()\l+ verif_regle()\l+ sauvegarder_estimation()\l+ clignoter()\l+ creer_fichier_json()\l+ sauvegarder_donnees()\l+ appel_bouton()\l+ recommencer_partie_mode()\l+ fin_de_partie()\l+ tache_suivante()\l+ afficher_donnees_json()\l+ pause()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{Interface_strict.Application\n|+ master\l+ list_pseudos\l+ mode\l+ label_nbJoueur\l+ frame_nbJoueur\l+ bouton_valider\l+ nb_joueurs\l+ fenetre_pseudo\l+ liste_values\l+ label_pseudo\land 9 more...\l+ tour_actuel\l|+ __init__()\l+ entrer_pseudos()\l+ recupere_mode_strict()\l+ recupere_mode_mediane()\l+ recupere_mode_moyenne()\l+ recupere_mode_maj_abs()\l+ recupere_mode_maj_rel()\l+ recupere_pseudos()\l+ recommencer_partie()\l+ effacer_donnee_json()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_application.html"];
+}

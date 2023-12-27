@@ -1,0 +1,18 @@
+digraph "Interface_strict.Mode_Majorite_Relative.sauvegarder_estimation_majorite_rel"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node17 [label="Interface_strict.Mode\l_Majorite_Relative.sauvegarder\l_estimation_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node17 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="ApplicationPocker.Mode\l_Majorite_Relative.calcul\l_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___majorite___relative.html#af9bb1561520e05a2a3732f367caaf5d6"];
+  Node17 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="Interface_strict.Mode\l_Majorite_Relative.calcul\l_majorite_rel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___majorite___relative.html#a10acd9f7fd88ce3d525f48d4feaa0a8b"];
+  Node17 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="ApplicationPocker.Mode\l_Strict.clignoter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___strict.html#a843a41abde8f3149546359546840d74a"];
+  Node20 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="Interface_strict.Mode\l_Strict.clignoter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html#a4e861610380efa3bf23ac3e7c2ecdac7"];
+  Node21 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

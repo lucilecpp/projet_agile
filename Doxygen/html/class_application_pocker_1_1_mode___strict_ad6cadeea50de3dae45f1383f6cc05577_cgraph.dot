@@ -1,0 +1,10 @@
+digraph "ApplicationPocker.Mode_Strict.tache_suivante"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node123 [label="ApplicationPocker.Mode\l_Strict.tache_suivante",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node123 -> Node124 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node124 [label="ApplicationPocker.Mode\l_Strict.clignoter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_application_pocker_1_1_mode___strict.html#a843a41abde8f3149546359546840d74a"];
+  Node124 -> Node124 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

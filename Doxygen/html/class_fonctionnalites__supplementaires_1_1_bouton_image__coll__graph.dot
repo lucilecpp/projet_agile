@@ -1,0 +1,6 @@
+digraph "Fonctionnalites_supplementaires.BoutonImage"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Fonctionnalites_supplementaires.\lBoutonImage\n|+ master\l+ liste_valeur\l+ nb\l+ dossier_cartes\l|+ __init__()\l+ appel_bouton()\l+ vote_estimation()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

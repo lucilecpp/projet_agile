@@ -1,0 +1,6 @@
+digraph "Interface1bis.mode_stricte"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Interface1bis.mode\l_stricte\n|+ master\l+ estimation\l+ ensemble_estimation\l|+ __init__()\l+ sauvegarder_estimation()\l+ regle_strict()\l+ sauv_estim_json()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

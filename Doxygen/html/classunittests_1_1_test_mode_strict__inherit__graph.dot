@@ -1,0 +1,8 @@
+digraph "unittests.TestModeStrict"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node0 [label="{unittests.TestModeStrict\n|+ root\l+ mode_strict\l|+ setUp()\l+ tearDown()\l+ test_sauvegarder_donnees()\l+ test_recommencer_partie_mode()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node1 [label="{TestCase\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

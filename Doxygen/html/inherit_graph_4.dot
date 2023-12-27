@@ -1,0 +1,19 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="TestCase",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="unittests.TestApplication",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_application.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="unittests.TestModeMajorite\lAbsolue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_mode_majorite_absolue.html"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="unittests.TestModeMajorite\lRelative",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_mode_majorite_relative.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="unittests.TestModeMediane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_mode_mediane.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="unittests.TestModeMoyenne",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_mode_moyenne.html"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="unittests.TestModeStrict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunittests_1_1_test_mode_strict.html"];
+}

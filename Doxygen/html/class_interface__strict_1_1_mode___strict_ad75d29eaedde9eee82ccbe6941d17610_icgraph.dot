@@ -1,0 +1,13 @@
+digraph "Interface_strict.Mode_Strict.vote_estimation"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node168 [label="Interface_strict.Mode\l_Strict.vote_estimation",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node168 -> Node169 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node169 [label="Interface_strict.Mode\l_Strict.appel_bouton",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html#a248365067bfedb966e6b5a75bd8a8690"];
+  Node169 -> Node170 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node170 [label="Interface_strict.Mode\l_Strict.sauvegarder_donnees",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html#a3fc3e3f1b7b81190fb9504d8d1373c93"];
+  Node170 -> Node171 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node171 [label="Interface_strict.Mode\l_Strict.__init__",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_interface__strict_1_1_mode___strict.html#a2cfc45c81a34f7c133c7e208030be1d3"];
+}

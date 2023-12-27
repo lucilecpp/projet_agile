@@ -1,0 +1,6 @@
+digraph "Interface2bis.MinuterieApp"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Interface2bis.MinuterieApp\n|+ fenetre\l+ temps_restant\l+ label_temps\l+ bouton_demarrer\l+ bouton_arreter\l+ duree\l+ temps_restant_sec\l+ minuterie_active\l|+ __init__()\l+ format_duree()\l+ mise_a_jour_temps()\l+ demarrer_minuterie()\l+ arreter_minuterie()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

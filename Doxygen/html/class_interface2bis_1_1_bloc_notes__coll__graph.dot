@@ -1,0 +1,6 @@
+digraph "Interface2bis.BlocNotes"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Interface2bis.BlocNotes\n|+ master\l+ texte\l+ entree_texte\l+ bouton_valider\l+ label_texte\l|+ __init__()\l+ afficher_texte()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

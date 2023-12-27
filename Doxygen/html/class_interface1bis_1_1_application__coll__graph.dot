@@ -1,0 +1,6 @@
+digraph "Interface1bis.Application"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Interface1bis.Application\n|+ master\l+ nb_joueurs\l+ mode_jeu\l+ label_mode_jeu\l+ frame_mode_jeu\l+ label_nbJoueur\l+ frame_nbJoueur\l+ bouton_valider\l+ liste_values\l|+ __init__()\l+ entrer_pseudos()\l+ recupere_mode()\l+ recupere_nb_joueur()\l+ recupere_pseudos()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

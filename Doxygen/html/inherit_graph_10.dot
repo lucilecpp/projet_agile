@@ -1,0 +1,15 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="test.Mode_Strict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___strict.html"];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="test.Mode_Majorite\l_Absolue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___majorite___absolue.html"];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="test.Mode_Majorite\l_Relative",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___majorite___relative.html"];
+  Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="test.Mode_Mediane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___mediane.html"];
+  Node0 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="test.Mode_Moyenne",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___moyenne.html"];
+}

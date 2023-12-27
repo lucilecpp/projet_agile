@@ -1,0 +1,8 @@
+digraph "test.Mode_Majorite_Absolue"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node2 [label="{test.Mode_Majorite\l_Absolue\n|+ master\l+ estimation\l+ nb\l+ zone_texte\l+ label_num\l+ entree_num\l+ label_nom\l+ entree_nom\l+ label_description\l+ entree_description\l+ label_pseudo\l|+ __init__()\l+ vote_estimation_majorite_abs()\l+ calcul_majorite_abs()\l+ sauvegarder_estimation\l_majorite_abs()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{test.Mode_Strict\n|+ master\l+ estimation\l+ zone_texte\l+ label_num\l+ entree_num\l+ label_nom\l+ entree_nom\l+ label_description\l+ entree_description\l+ label_pseudo\l+ estimation_final\l+ zone_json_texte\l|+ __init__()\l+ vote_estimation()\l+ verif_regle()\l+ sauvegarder_estimation()\l+ creer_fichier_json()\l+ sauvegarder_donnees()\l+ recommencer_partie_mode()\l+ fin_de_partie()\l+ tache_suivante()\l+ afficher_donnees_json()\l+ pause()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtest_1_1_mode___strict.html"];
+}
