@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 import cairosvg
 import os
 
-# classe pour remplacer les boutons de vote par une image de la carte
+# Classe pour remplacer les boutons de vote par une image
 class BoutonImage:
     """
     @class BoutonImage
@@ -19,7 +19,7 @@ class BoutonImage:
         # Liste des valeurs présentes sur les cartes
         self.liste_valeur = [0, 1, 2, 3, 5, 8, 13, 20, 40, 100, "interro", "cafe"]
         
-        # Déclaration du nombre de joueur
+        # Déclaration du nombre de joueurs
         self.nb = 3
 
         # Chemin vers le dossier contenant les fichiers SVG
@@ -31,7 +31,7 @@ class BoutonImage:
     def appel_bouton(self):
         """
         @brief Méthode pour afficher les boutons sous forme d'image
-        Des pseudos et le nombre de joueur ont été simulé pour recréer les mêmes conditions que la classe Application
+        Des pseudos et le nombre de joueurs ont été simulé pour recréer les mêmes conditions que la classe Application
         """
         for k in ("pseudo1", "pseudo2", "pseudo3"):
             for i, value in enumerate(self.liste_valeur):
@@ -65,7 +65,7 @@ class BoutonImage:
         """
         print(f"Valeur sélectionnée : {value}")
 
-# Instanciation d'un objet pour l'affichage des cartes'
+# Instanciation d'un objet pour l'affichage des cartes
 '''if __name__ == "__main__":
     root = Tk()
     app = BoutonImage(root)
@@ -88,7 +88,7 @@ class CompteAReboursApp:
 
         self.temps_restant = tk.StringVar()
 
-        # Affichage du temps restant sur le fenêtre principal
+        # Affichage du temps restant sur la fenêtre principale
         self.label_temps = tk.Label(fenetre, textvariable=self.temps_restant, font=("Helvetica", 48))
         self.label_temps.pack(pady=20)
 
@@ -118,8 +118,8 @@ class CompteAReboursApp:
 
     def mise_a_jour_temps(self):
         """
-        @brief Méthode pour mettre à jour le temps afficher du minuteur
-        Dès un compte à rebours est actif, cette méthode décrémente le temps de 1 seconde toutes les secondes.
+        @brief Méthode pour mettre à jour le temps, afficher du minuteur
+        Dès qu'un compte à rebours est actif, cette méthode décrémente le temps de 1 seconde toutes les secondes.
         """
         if self.compte_a_rebours_actif:
             self.temps_restant_sec -= 1
